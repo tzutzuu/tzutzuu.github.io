@@ -1,0 +1,92 @@
+:root {
+  color-scheme: light;
+  --bg: #f7f7f9;
+  --text: #20222a;
+  --muted: #6b7280;
+  --accent: #1f6feb;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Root scrolling element: enable vertical snap here */
+  scroll-snap-type: y mandatory;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  position: relative;
+  min-height: 100%;
+}
+
+.map-bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.floating-section {
+  position: relative;
+  min-height: 150vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* Each story/map step should snap cleanly */
+.map-step {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.kicker {
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+  margin: 0 0 0.2rem;
+}
+
+.note {
+  color: var(--muted);
+}
+
+.lede {
+  font-size: 1.1rem;
+  max-width: 56ch;
+}
+
+@media (max-width: 640px) {
+  .floating-card {
+    padding: 1.5rem 2rem;
+    max-width: 90%;
+  }
+}
+
