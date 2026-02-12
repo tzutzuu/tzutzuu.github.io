@@ -1,11 +1,20 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Character encoding + responsive scaling -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Page title shown in browser tab -->
   <title>The Global Semiconductor Supply Chain</title>
+
+  <!-- Tailwind via CDN: enables all those utility classes (p-6, bg-white/95, rounded-2xl, etc.) -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- MapLibre CSS: needed so the map (controls, canvas, etc.) renders correctly -->
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.css">
+
+  <!-- Custom CSS-->
   <link rel="stylesheet" href="./style.css">
   <style>
     @font-face {
@@ -15,130 +24,140 @@
   </style>
 </head>
 <body class="m-0 bg-[#f7f7f9] text-[#20222a] leading-relaxed relative">
+    <!--
+    Fixed full-screen map layer.
+    - fixed inset-0 makes it cover the entire viewport
+    - z-[1] puts it behind the storytelling content (which is z-[2])
+    - aria-hidden because it’s a visual backdrop; the “story” is the main accessible content
+  -->
+
   <div id="map" class="fixed inset-0 w-full h-screen z-[1]" aria-hidden="true"></div>
+  <!--
+    Foreground storytelling container.
+    - relative so its children can layer over the fixed map
+    - z-[2] ensures text/cards stay above the map
+  -->
 
   <div class="relative z-[2]">
+        <!--
+      Main scrollytelling column.
+      - flex flex-col stacks sections vertically
+      - min-h-[900vh] forces a very long scroll so you can trigger many map “scenes”
+        (each section is like a checkpoint for a map camera move / highlight change)
+    -->
     <main class="flex flex-col gap-0 min-h-[900vh]">
-      <section class="map-step relative min-h-[100vh] flex items-center justify-center p-4 sm:p-6 md:p-8" data-scene="0">
-        <div class="floating-card bg-white/95 border border-[#e5e7eb] rounded-2xl p-6 sm:p-8 md:p-10 shadow-[0_12px_30px_rgba(0,0,0,0.08)] max-w-[90%] sm:max-w-3xl md:max-w-4xl lg:max-w-5xl xl:max-w-6xl backdrop-blur-sm opacity-85 transition-all duration-200 ease-in-out">
-          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-[#20222a] leading-tight text-center">
-            The Global Semiconductor Supply Chain
-          </h1>
-          <p class="text-xl sm:text-2xl md:text-3xl text-[#6b7280] font-medium text-center">
-            From Integrated Supply Chains to a Multi-Track Tech World
-          </p>
+ 
+      <!-- SCENE 0 (intro title screen) -->
+      <section class="map-step relative min-h-[100vh] flex items-center justify-center p-4 sm:p-6 md:p-8" id="intro" data-scene="0">
+        <div class="intro-card">
+          <p class="kicker">Scroll to explore</p>
+          <h1 class="intro-title">The Global Semiconductor Supply Chain</h1>
+          <h2 class="intro-subtitle">The making of a chip, across the world</h2>
+          <p class="intro-text">Semiconductors, or chips, sit at the center of modern life. Every computer, phone, home appliance, medical device, or electric vehicle depends on them. Yet the path from raw materials to a finished chip is one of the most intricate global supply chains ever created. Dozens of countries contribute, thousands of steps unfold in cleanrooms, and a single defect can ruin an entire batch.</p>
+          <p class="intro-text">This scroll-through page introduces you to the technical backbone of chipmaking—from design, to fabrication, to assembly and testing. As you move through each segment, you'll see how different regions of the world specialize in different parts of this chain, what are the companies that play important roles, and why no single country can make an advanced chip entirely on its own.</p>
         </div>
       </section>
 
-      <section class="map-step relative min-h-[100vh] flex items-center justify-center p-4 sm:p-6 md:p-8" data-scene="1">
-        <div class="floating-card bg-white/95 border border-[#e5e7eb] rounded-2xl p-6 sm:p-8 md:p-10 shadow-[0_12px_30px_rgba(0,0,0,0.08)] max-w-[90%] sm:max-w-3xl md:max-w-4xl lg:max-w-5xl xl:max-w-6xl backdrop-blur-sm opacity-85 transition-all duration-200 ease-in-out">
-            <p class="text-lg sm:text-xl md:text-2xl text-[#20222a] leading-relaxed mb-4 text-center">
-            Semiconductors sit at the center of modern life. Every phone call, online purchase, GPS route, medical device, or electric vehicle depends on them. Yet the path from raw materials to a finished chip is one of the most intricate global supply chains ever created.             Dozens of countries contribute, thousands of steps unfold in cleanrooms, and a single defect can ruin an entire batch.
-          </p>
-          <p class="text-lg sm:text-xl md:text-2xl text-[#20222a] leading-relaxed text-center">
-            This scroll-through page introduces you to the technical backbone of chipmaking—from design, to fabrication, to assembly and testing. As you move through each segment, you'll see how different regions of the world specialize in different parts of this chain, and why no single country can make an advanced chip entirely on its own.
-          </p>
-        </div>
-      </section>
-
-      <section class="map-step relative min-h-[100vh] flex items-center justify-center p-4 sm:p-6 md:p-8" data-scene="2">
-        <div class="floating-card bg-white/95 border border-[#e5e7eb] rounded-2xl p-6 sm:p-8 md:p-10 shadow-[0_12px_30px_rgba(0,0,0,0.08)] max-w-[90%] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl backdrop-blur-sm opacity-85 transition-all duration-200 ease-in-out text-center">
-            <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-[#20222a] leading-tight text-center">
-                First stage: Design
-            </h1>
-          <p class="text-lg sm:text-xl md:text-2xl text-[#6b7280] font-medium mb-4">Where ideas become architectures.</p>
-          <p class="text-base sm:text-lg md:text-xl text-[#20222a] leading-relaxed">Before a chip ever touches silicon, everything begins with design.</p>
-        </div>
-      </section>
-
-      <section class="map-step relative min-h-[100vh] p-4 sm:p-6 md:p-8 overflow-hidden" data-scene="3">
-        <svg class="absolute inset-0 w-full h-full pointer-events-none" style="z-index: 1;">
-          <defs>
-            <marker id="arrowhead-3" markerWidth="12" markerHeight="12" refX="11" refY="4" orient="auto">
-              <polygon points="0 0, 12 4, 0 8" fill="#6b7280" />
-            </marker>
-          </defs>
-          <line x1="65%" y1="40%" x2="38%" y2="40%" stroke="#6b7280" stroke-width="4" marker-end="url(#arrowhead-3)" class="hidden sm:block" />
-          <line x1="65%" y1="55%" x2="38%" y2="55%" stroke="#6b7280" stroke-width="4" marker-end="url(#arrowhead-3)" class="hidden sm:block" />
-        </svg>
-
-        <div class="absolute left-4 sm:left-8 md:left-12 lg:left-16 top-1/3 w-[280px] sm:w-[320px] md:w-[380px] lg:w-[420px] bg-white/95 border border-[#e5e7eb] rounded-2xl p-4 sm:p-6 md:p-8 shadow-[0_12px_30px_rgba(0,0,0,0.08)] backdrop-blur-sm opacity-85 transition-all duration-200 ease-in-out z-10">
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 text-[#20222a] text-center">Design</h2>
-          <p class="text-sm sm:text-base md:text-lg text-[#20222a] leading-relaxed text-center">
-            The design of chips are precise instructions, known as <em class="italic">masks</em> or <em class="italic">layouts</em>, that dictate where each transistor will sit on the silicon wafer.
-          </p>
+      <!-- SCENE 1 (stages overview) -->
+      <section class="map-step relative min-h-[100vh] flex flex-col items-center justify-center p-4 sm:p-6 md:p-8" data-scene="1">
+        <!-- Top 2/3: text card -->
+        <div class="stages-card">
+          <h2 class="stages-title">Stages in the Semiconductor Supply Chain</h2>
+          <p class="stages-text">There are three main stages of the semiconductor value chain: <strong>design, manufacturing (wafer fabrication), and assembly, test, and packaging (ATP)</strong>. Each of these stages depends on specific inputs. Both the processes and their inputs <strong>rely heavily on R&amp;D and are knowledge-intensive</strong>. This is reflected in the semiconductor industry having some of the highest R&amp;D expenditure ratios of any industry. Such a capital- and innovation-intensive structure, in turn, contributes to highly concentrated markets dominated by &ldquo;giant&rdquo; firms with disproportionate resources and access to leading-edge technologies.</p>
         </div>
 
-        <div class="absolute right-4 sm:right-8 md:right-12 lg:right-16 top-[15%] sm:top-[12%] w-[360px] sm:w-[380px] md:w-[400px] lg:w-[420px] bg-white/95 border border-[#e5e7eb] rounded-2xl p-2 sm:p-4 md:p-6 shadow-[0_12px_30px_rgba(0,0,0,0.08)] backdrop-blur-sm opacity-85 transition-all duration-200 ease-in-out z-10">
-          <p class="text-sm sm:text-base md:text-lg text-[#20222a] leading-relaxed text-center">
-            Two important inputs at the design stage are:
-          </p>
-        </div>
-
-        <div class="absolute right-8 sm:right-12 md:right-16 lg:right-24 top-[36%] sm:top-[32%] w-[240px] sm:w-[280px] md:w-[320px] lg:w-[360px] bg-white/95 border border-[#e5e7eb] rounded-2xl p-4 sm:p-6 md:p-8 shadow-[0_12px_30px_rgba(0,0,0,0.08)] backdrop-blur-sm opacity-85 transition-all duration-200 ease-in-out z-10">
-          <p class="text-sm sm:text-base md:text-lg text-[#20222a] leading-relaxed text-center">
-            high-end Electronic Design Automation (EDA) tools
-          </p>
-        </div>
-
-        <div class="absolute right-8 sm:right-12 md:right-16 lg:right-24 top-[50%] sm:top-[48%] w-[240px] sm:w-[280px] md:w-[320px] lg:w-[360px] bg-white/95 border border-[#e5e7eb] rounded-2xl p-4 sm:p-6 md:p-8 shadow-[0_12px_30px_rgba(0,0,0,0.08)] backdrop-blur-sm opacity-85 transition-all duration-200 ease-in-out z-10">
-          <p class="text-sm sm:text-base md:text-lg text-[#20222a] leading-relaxed text-center">
-            third-party IP cores
-          </p>
-        </div>
-      </section>
-
-      <section class="map-step relative min-h-[100vh] flex items-center justify-center p-4 sm:p-6 md:p-8" data-scene="4">
-        <div class="floating-card bg-white/95 border border-[#e5e7eb] rounded-2xl p-6 sm:p-8 md:p-10 shadow-[0_12px_30px_rgba(0,0,0,0.08)] max-w-[90%] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl backdrop-blur-sm opacity-85 transition-all duration-200 ease-in-out text-center">
-            <p class="text-sm sm:text-base md:text-lg text-[#20222a] leading-relaxed text-center">
-                Companies define the chip’s purpose, such as mobile processor, AI accelerator, automotive controller, etc. Then, using high-end EDA tools, engineers create architectural blueprints including logic blocks, memory layout, power management, and interconnects. Third-party IP cores (e.g., patented ARM CPU designs, GPU blocks) are often integrated to speed development.
-              </p>
-        </div>
-      </section>
-
-      <section class="map-step relative min-h-[100vh] flex items-center justify-center p-4 sm:p-6 md:p-8" data-scene="5">
-        <div class="floating-card bg-white/95 border border-[#e5e7eb] rounded-2xl p-6 sm:p-8 md:p-10 shadow-[0_12px_30px_rgba(0,0,0,0.08)] max-w-[90%] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl backdrop-blur-sm opacity-85 transition-all duration-200 ease-in-out text-center">
-          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-[#2563eb]">
-            Fabless vs IDM
-          </h2>
-          <p class="text-base sm:text-lg md:text-xl text-[#20222a] leading-relaxed mb-4 text-left">
-            Not all companies design chips in the same way. The semiconductor industry is split into two major models — 
-            <span class="font-semibold text-[#2563eb]">fabless and IDM (Integrated Device Manufacturer)</span> — each shaping global supply chains differently.
-          </p>
-          <p class="text-base sm:text-lg md:text-xl text-[#20222a] leading-relaxed mb-4 text-left">
-            Many of today’s most recognizable semiconductor giants do not manufacture their own chips. They follow a fabless model: 
-            they focus exclusively on design and rely on specialized manufacturers to build their chips. They also often spend an 
-            extensive amount of revenue on R&amp;D.
-          </p>
-          <p class="text-base sm:text-lg md:text-xl text-[#20222a] leading-relaxed text-left">
-            On the other side are IDMs, companies that handle the entire process from design and fabrication to assembly and testing. 
-            These firms control their own factories and supply chains, giving them greater independence but much higher costs.
-          </p>
-        </div>
-      </section>
-
-      <section class="map-step relative min-h-[100vh] flex items-center justify-start p-4 sm:p-6 md:p-8" data-scene="6">
-          <div class="bg-white/95 border border-[#e5e7eb] mt-44 rounded-2xl px-5 py-5 sm:px-10 sm:py-7 shadow-[0_18px_45px_rgba(0,0,0,0.16)] max-w-[60%] sm:max-w-1xl md:max-w-2xl lg:max-w-3xl">
-            <p class="text-sm sm:text-base md:text-lg font-semibold text-[#111827] leading-relaxed mb-2">
-              The numbers show the global IC design revenue by country, 2021.
-            </p>
-            <p class="text-sm sm:text-base md:text-lg text-[#111827] leading-relaxed">
-              The United States leads in the semiconductor design segment, with U.S. firms capturing more than 40 percent of global IC design
-              market share, which includes EDA, semiconductor IP, and design services revenue.
-            </p>
+        <!-- Bottom 1/3: image flow Design → Manufacturing → ATP -->
+        <div class="stages-flow">
+          <div class="stages-img-wrapper">
+            <img src="./assets/Design.png" alt="Design stage" class="stages-img" />
+            <span class="stages-img-label">Design</span>
           </div>
+          <div class="stages-arrow">
+            <svg width="48" height="24" viewBox="0 0 48 24" fill="none">
+              <line x1="0" y1="12" x2="40" y2="12" stroke="#1a3a6e" stroke-width="3"/>
+              <polygon points="40,4 48,12 40,20" fill="#1a3a6e"/>
+            </svg>
+          </div>
+          <div class="stages-img-wrapper">
+            <img src="./assets/Manufacturing.png" alt="Manufacturing stage" class="stages-img" />
+            <span class="stages-img-label">Manufacturing</span>
+          </div>
+          <div class="stages-arrow">
+            <svg width="48" height="24" viewBox="0 0 48 24" fill="none">
+              <line x1="0" y1="12" x2="40" y2="12" stroke="#1a3a6e" stroke-width="3"/>
+              <polygon points="40,4 48,12 40,20" fill="#1a3a6e"/>
+            </svg>
+          </div>
+          <div class="stages-img-wrapper">
+            <img src="./assets/ATP.png" alt="ATP stage" class="stages-img" />
+            <span class="stages-img-label">Assembly, Test, & Packaging</span>
+          </div>
+        </div>
       </section>
 
-      <section class="map-step relative min-h-[100vh] flex items-start justify-center p-4 sm:p-6 md:p-8" data-scene="7">
-        <div class="bg-white/95 border border-[#111827] rounded-2xl px-5 py-5 sm:px-10 sm:py-7 shadow-[0_18px_45px_rgba(0,0,0,0.24)] max-w-[95%] sm:max-w-3xl md:max-w-4xl lg:max-w-5xl">
-          <p class="text-base sm:text-lg md:text-xl font-semibold text-[#111827] leading-relaxed text-left">
-            Some of the key American fabless companies include AMD, Broadcom, NVIDIA, Qualcomm, Marvell Technology. Most of them are located in California.
+       <!-- SCENE 2 (Design stage: text + infographic side by side) -->
+      <section class="map-step relative min-h-[100vh] flex items-center justify-center p-4 sm:p-6 md:p-8" data-scene="2">
+        <div class="design-stage-row">
+          <!-- Left: text card -->
+          <div class="design-stage-card">
+            <h2 class="design-stage-title">1. First Stage: Design</h2>
+            <p class="design-stage-text">Semiconductor design is the upstream stage where a chip&rsquo;s architecture is defined to meet specific performance, power, and cost objectives. This work is highly knowledge-intensive and depends on <strong>specialized engineering talent, advanced design software (EDA tools), and access to reusable intellectual property blocks (IP cores)</strong>.</p>
+            <p class="design-stage-text">The process starts with defining the chip&rsquo;s purpose, such as mobile processor, AI accelerator, automotive controller, etc.</p>
+            <p class="design-stage-text">Then, using high-end <strong>EDA tools</strong>, which are advanced softwares for designing highly complex circuits, engineers create architectural blueprints including logic blocks, memory layout, power management, and interconnects. During this process, third-party <strong>IP cores</strong> are often integrated to speed development. These IP cores are pre-designed circuit blocks with specific functionality such as patented CPU designs and GPU blocks.</p>
+          </div>
+          <!-- Right: infographic -->
+          <div class="design-stage-img-wrapper">
+            <img src="./assets/Design%20-%20infographic%201.png" alt="Design stage infographic" class="design-stage-img" />
+          </div>
+        </div>
+      </section>
+
+      <!-- SCENE 3 (concept explainer: Fabless vs IDM) -->
+      <section class="map-step relative min-h-[100vh] flex items-center justify-center p-4 sm:p-6 md:p-8" data-scene="3">
+        <div class="fabless-idm-card">
+          <h2 class="fabless-idm-title">Two Business Models: Fabless vs IDM</h2>
+          <p class="fabless-idm-text">
+            Not all companies design chips in the same way. The semiconductor industry is split into <strong>two major models &mdash; <span class="color-fabless">Fabless</span> and <span class="color-idm">IDM (Integrated Device Manufacturer)</span> &mdash; each shaping global supply chains differently.</strong>
+          </p>
+          <p class="fabless-idm-text">
+            Many of today&rsquo;s most recognizable semiconductor giants do not manufacture their own chips. They follow a fabless model: they <strong class="color-fabless">focus exclusively on design and rely on specialized manufacturers to build their chips</strong>. They also often spend an extensive amount of revenue on R&amp;D.
+          </p>
+          <p class="fabless-idm-text">
+            On the other side are IDMs, companies that <strong class="color-idm">handle the entire process from design and fabrication to assembly and testing</strong>. These firms control their own factories and supply chains, giving them greater independence but much higher costs.
+          </p>
+        </div>
+      </section>
+
+
+      <!-- SCENE 4 (IC Design Revenue Share – country highlights + bar chart on map) -->
+      <section class="map-step relative min-h-[100vh] flex items-end justify-start p-4 sm:p-6 md:p-8" data-scene="4">
+        <div class="revenue-card">
+          <h3 class="revenue-card-title">Global IC (Integrated Circuits) Design Revenue Share (2021)</h3>
+          <p class="revenue-card-text">
+            The United States dominates the global IC design landscape, capturing 43% of total revenue that spans electronic design automation (EDA), semiconductor intellectual property (IP), and professional design services. Although there are no publicly available newer data, the US share is known to have only been growing in recent years.
+          </p>
+          <p class="revenue-card-text">
+            South Korea followed with 21%, reflecting the strength of its major chip champions. Taiwan accounted for 8%, supported by its vibrant fabless ecosystem, while both China (7%) and Japan (7.4%) held meaningful but smaller shares in the design segment. The remaining 13.5% was distributed across the rest of the world.
+          </p>
+          <div class="revenue-card-source">
+            <p class="revenue-card-note">* Does not capture the design value created and used solely within the same firm (e.g., IDM companies that own their own IP).</p>
+            <p class="revenue-card-link">Source: <a href="https://www.csis.org/analysis/mapping-semiconductor-supply-chain-critical-role-indo-pacific-region" target="_blank" rel="noopener noreferrer" class="underline decoration-dotted hover:text-blue-600">CSIS, 2021</a></p>
+          </div>
+        </div>
+      </section>
+      <!-- SCENE 5 (US Fabless companies on California map) -->
+      <section class="map-step relative min-h-[100vh] flex items-start justify-end p-4 sm:p-6 md:p-8" data-scene="5">
+        <div class="fabless-scene-card">
+          <h3 class="fabless-scene-title">Key US Fabless Companies</h3>
+          <p class="fabless-scene-text">
+            Some of the key American fabless companies include AMD, Broadcom, NVIDIA, Qualcomm, and Marvell Technology. Most of them are headquartered in California&rsquo;s Silicon Valley.
           </p>
         </div>
 
+        <!-- Bottom-left "category tag + source" overlay. -->
         <div class="pointer-events-none absolute left-4 bottom-4 sm:left-8 sm:bottom-6 flex flex-col gap-3 items-start">
-          <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#fef08a] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#e5e7eb]">
-            <span class="text-base sm:text-lg font-semibold tracking-wide text-[#374151]">
+          <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#f0ff53] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#1a3a6e]">
+            <span class="text-base sm:text-lg font-semibold tracking-wide text-[#1a3a6e]">
               Fabless
             </span>
           </div>
@@ -148,87 +167,103 @@
         </div>
       </section>
 
-    <section class="map-step relative min-h-[100vh] flex items-start justify-center p-4 sm:p-6 md:p-8" data-scene="8">
-        <div class="bg-white/95 border border-[#111827] rounded-2xl px-5 py-5 sm:px-10 sm:py-7 shadow-[0_18px_45px_rgba(0,0,0,0.24)] max-w-[95%] sm:max-w-3xl md:max-w-4xl lg:max-w-5xl">
-            <p class="text-base sm:text-lg md:text-xl font-semibold text-[#111827] leading-relaxed text-left">
-                Key American EDM & IP companies are Synopsys and Cadence, taking 31% and 30% of market share each. 
-            </p>
+      <!--
+      SCENE 8
+      - Focus: EDA / IP firms (Synopsys, Cadence) and their market share.
+      - Uses a different tag color (red) to distinguish “EDM & IP” as a category on the map/story.
+      -->      
+    <section class="map-step relative min-h-[100vh] flex items-center justify-center p-4 sm:p-6 md:p-8" data-scene="6">
+        <div class="eda-scene-card" style="margin-top: 12vh;">
+          <h3 class="eda-scene-title">Key US EDA &amp; IP Companies</h3>
+          <p class="eda-scene-text">
+            Key American EDA &amp; IP companies are Synopsys and Cadence, taking 31% and 30% of market share each.
+          </p>
+        </div>
+
+        <!-- Bottom-left category tag + source -->
+        <div class="pointer-events-none absolute left-4 bottom-4 sm:left-8 sm:bottom-6 flex flex-col gap-3 items-start">
+          <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#ea9999] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#1a3a6e]">
+            <span class="text-base sm:text-lg font-semibold tracking-wide text-[#1a3a6e]">
+              EDA &amp; IP
+            </span>
           </div>
-  
-          <div class="pointer-events-none absolute left-4 bottom-4 sm:left-8 sm:bottom-6 flex flex-col gap-3 items-start">
-            <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#e06666] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#e5e7eb]">
-              <span class="text-base sm:text-lg font-semibold tracking-wide text-[#374151]">
-                EDM & IP
+          <p class="pointer-events-auto text-[10px] sm:text-xs text-[#6b7280]">
+            Source: <a href="https://companiesmarketcap.com/semiconductors/largest-semiconductor-companies-by-market-cap/" target="_blank" rel="noopener noreferrer" class="underline decoration-dotted hover:text-blue-600">companiesmarketcap.com</a>
+          </p>
+        </div>
+    </section>
+
+    <!--
+      SCENE 9
+      - Focus: US IDMs (integrated device manufacturers).
+      - Text emphasizes geography/industrial constraints (fabs require land/utilities/zoning),
+        which pairs well with a map zoom showing scattered fab locations across states.
+    -->
+    <section class="map-step relative min-h-[100vh] flex items-center justify-center p-4 sm:p-6 md:p-8" data-scene="7">
+        <div class="idm-scene-card">
+          <h3 class="idm-scene-title">Key US IDM Companies</h3>
+          <p class="idm-scene-text">
+            Key American IDM companies include Intel, Micron Technology, Texas Instruments, and Analog Devices. Unlike fabless firms clustered in coastal tech hubs, American IDMs are scattered across states like Oregon, Arizona, Texas, Idaho, and Utah. Their fabs and packaging sites demand enormous physical space, consistent utilities, and specialized zoning.
+          </p>
+        </div>
+
+        <!-- Bottom-left IDM tag + source -->
+        <div class="pointer-events-none absolute left-4 bottom-4 sm:left-8 sm:bottom-6 flex flex-col gap-3 items-start">
+          <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#e9bcff] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#1a3a6e]">
+            <span class="text-base sm:text-lg font-semibold tracking-wide text-[#1a3a6e]">
+              IDM
+            </span>
+          </div>
+          <p class="pointer-events-auto text-[10px] sm:text-xs text-[#6b7280]">
+            Source: <a href="https://companiesmarketcap.com/semiconductors/largest-semiconductor-companies-by-market-cap/" target="_blank" rel="noopener noreferrer" class="underline decoration-dotted hover:text-blue-600">companiesmarketcap.com</a>
+          </p>
+        </div>
+    </section>
+
+    <!--
+      SCENE 10
+      - Focus: Asia design ecosystem; mixes IDMs + fabless in the same region.
+      - Layout: justify-start places the main card to the left, leaving map context on the right.
+      - Tag stack: shows both IDM + Fabless labels together (visual legend for mixed categories).
+    -->
+    <section class="map-step relative min-h-[100vh] flex items-center justify-start p-4 sm:p-6 md:p-8" data-scene="8">
+        <div class="asia-scene-card">
+          <h3 class="asia-scene-title">Key Asian Semiconductor Companies</h3>
+          <p class="asia-scene-text">
+            Asia has become a major force in semiconductor design, especially in consumer electronics, AI accelerators, and imaging technology.
+          </p>
+          <p class="asia-scene-text">
+            Leading IDMs include Samsung and SK Hynix in South Korea, while prominent fabless designers such as MediaTek in Taiwan and Cambricon Technologies in China are expanding rapidly.
+          </p>
+        </div>
+
+        <!-- Bottom-left IDM + Fabless tags + source -->
+        <div class="pointer-events-none absolute left-4 bottom-4 sm:left-8 sm:bottom-6 flex flex-col gap-3 items-start">
+          <div class="flex flex-row gap-2">
+            <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#e9bcff] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#1a3a6e]">
+              <span class="text-base sm:text-lg font-semibold tracking-wide text-[#1a3a6e]">
+                IDM
               </span>
             </div>
-            <p class="pointer-events-auto text-[10px] sm:text-xs text-[#6b7280]">
-              Source: 
-              <span class="underline decoration-dotted">
-                https://www.trendforce.com/news/2025/06/02/news-china-revenue-at-risk-as-u-s-curbs-slam-eda-giants-impact-on-synopsys-cadence-and-more/
-            </span>
-            <br>
-            <span class="underline decoration-dotted">
-                https://companiesmarketcap.com/semiconductors/largest-semiconductor-companies-by-market-cap/
-            </span>
-            </p>
-          </div>  
-    </section>
-
-    <section class="map-step relative min-h-[100vh] flex items-center justify-center p-4 sm:p-6 md:p-8" data-scene="9">
-    <div class="bg-white/95 border border-[#111827] rounded-2xl px-5 py-5 sm:px-10 sm:py-7 shadow-[0_18px_45px_rgba(0,0,0,0.24)] max-w-[95%] sm:max-w-3xl md:max-w-4xl lg:max-w-5xl">
-        <p class="text-base sm:text-lg md:text-xl font-semibold text-[#111827] leading-relaxed text-left">
-            Key American IDM companies include Intel, Micron Technology, Texas Instruments, and Analog Devices. Unlike fabless firms clustered in coastal tech hubs, American IDMs are scattered across states like Oregon, Arizona, Texas, Idaho, and Utah. Their fabs and packaging sites demand enormous physical space, consistent utilities, and specialized zoning.
-        </p>
-      </div>
-
-      <div class="pointer-events-none absolute left-4 bottom-4 sm:left-8 sm:bottom-6 flex flex-col gap-3 items-start">
-        <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#b4a7d6] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#e5e7eb]">
-          <span class="text-base sm:text-lg font-semibold tracking-wide text-[#374151]">
-            IDM
-          </span>
-        </div>
-        <p class="pointer-events-auto text-[10px] sm:text-xs text-[#6b7280]">
-          Source: 
-          <span class="underline decoration-dotted">
-            https://companiesmarketcap.com/semiconductors/largest-semiconductor-companies-by-market-cap/
-        </span>
-        </p>
-      </div>
-    </section>
-
-    <section class="map-step relative min-h-[100vh] flex items-center justify-start p-4 sm:p-6 md:p-8" data-scene="10">
-        <div class="bg-white/95 border border-[#111827] rounded-2xl px-5 py-5 sm:px-10 sm:py-7 shadow-[0_18px_45px_rgba(0,0,0,0.24)] max-w-[60%] sm:max-w-xl md:max-w-1xl lg:max-w-2xl">
-            <p class="text-base sm:text-lg md:text-xl font-semibold text-[#111827] leading-relaxed text-left">
-                Asia has become a major force in semiconductor design, especially in consumer electronics, AI accelerators, and imaging technology. 
-             </p>
-             <p class="text-base sm:text-lg md:text-xl font-semibold text-[#111827] leading-relaxed text-left">
-                Leading IDMs include Samsung and SK Hynix in South Korea and Sony in Japan, while prominent fabless designers such as MediaTek in Taiwan and Cambricon Technologies in China are expanding rapidly.
-            </p>   
-          </div>
-          <div class="pointer-events-none absolute left-4 bottom-4 sm:left-8 sm:bottom-6 flex flex-col gap-3 items-start">
-            <div class="flex flex-row gap-2">
-                <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#b4a7d6] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#e5e7eb]">
-                    <span class="text-base sm:text-lg font-semibold tracking-wide text-[#374151]">
-                      IDM
-                    </span>
-                  </div>
-                <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#fef08a] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#e5e7eb]">
-                <span class="text-base sm:text-lg font-semibold tracking-wide text-[#374151]">
-                    Fabless
-                </span>
-                </div>
-    
+            <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#f0ff53] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#1a3a6e]">
+              <span class="text-base sm:text-lg font-semibold tracking-wide text-[#1a3a6e]">
+                Fabless
+              </span>
             </div>
-            <p class="pointer-events-auto text-[10px] sm:text-xs text-[#6b7280]">
-              Source: 
-              <span class="underline decoration-dotted">
-                https://companiesmarketcap.com/semiconductors/largest-semiconductor-companies-by-market-cap/
-            </span>
-            </p>
           </div>
+          <p class="pointer-events-auto text-[10px] sm:text-xs text-[#6b7280]">
+            Source: <a href="https://companiesmarketcap.com/semiconductors/largest-semiconductor-companies-by-market-cap/" target="_blank" rel="noopener noreferrer" class="underline decoration-dotted hover:text-blue-600">companiesmarketcap.com</a>
+          </p>
+        </div>
     </section>
 
-    <section class="map-step relative min-h-[100vh] flex items-center justify-end p-4 sm:p-6 md:p-8" data-scene="11">
+    <!--
+      SCENE 11
+      - Focus: Europe’s role (IP/EDA + IDMs).
+      - Layout: justify-end puts the card on the right side, leaving map context visible on the left.
+      - Dual tags: EDM & IP + IDM reinforces Europe’s “strength in tools/IP + industrial chips” framing.
+    -->
+    <section class="map-step relative min-h-[100vh] flex items-center justify-end p-4 sm:p-6 md:p-8" data-scene="9">
         <div class="bg-white/95 border border-[#111827] rounded-2xl px-5 py-5 sm:px-10 sm:py-7 shadow-[0_18px_45px_rgba(0,0,0,0.24)] max-w-[60%] sm:max-w-1xl md:max-w-2xl lg:max-w-3xl">
             <p class="text-base sm:text-lg md:text-xl font-semibold text-[#111827] leading-relaxed text-left">
                 Europe plays a quieter but strategically important role in semiconductor design. While it does not lead in advanced logic fabrication, the region has strong footholds in IP cores, EDA tools, automotive semiconductors, and industrial electronics.              </p>
@@ -257,14 +292,13 @@
                 https://companiesmarketcap.com/semiconductors/largest-semiconductor-companies-by-market-cap/
             </span>
             </p>
-          </div>
+</div> </section> </main> </div> <!-- TopoJSON client: converts world-atlas TopoJSON → GeoJSON for country boundaries --> <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
 
-    </section>
-    </main>
-  </div>
-
+<!-- MapLibre JS: provides the map engine that attaches to #map and supports camera/layer changes -->
   <script src="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.js"></script>
+  <!--
+    Your custom script (deferred so HTML loads first).
+  -->
   <script defer src="./script.js"></script>
 </body>
 </html>
-
