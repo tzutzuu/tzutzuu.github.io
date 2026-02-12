@@ -1,0 +1,62 @@
+Rank,Name,Type of company,marketcap (billion),Latitude,Longitude,country,Headquater address,Included in the story board,Note,Symbol,price (USD)
+1,NVIDIA,Fabless (Design),"$4,241.00",37.37187,-121.9659302,United States,"2788 San Tomas Expressway, Santa Clara, CA 95051, United States",TRUE,,NVDA,174.19
+2,TSMC,Pureplay Foundry (Manufacturing),"$1,689.45",24.7820648,121.0046856,Taiwan,"8, Li-Hsin Rd. 6, Hsinchu Science Park, Hsinchu 300-096, Taiwan",TRUE,,TSM,325.74
+3,Broadcom,Fabless (Design),"$1,460.55",37.3993703,-122.1432136,United States,"3421 Hillview Avenue, Palo Alto, California, 94304",TRUE,,AVGO,308.05
+4,Samsung,IDM (Design),$773.95,37.2558477,127.0511335,South Korea,"129 Samsung-ro, Yeongtong-gu, Suwon, South Korea",TRUE,,005930.KS,115.755
+5,ASML,Equipment (Manufacturing),$519.78,51.404027,5.412781,Netherlands,"De Run 6501, 5504 DR in Veldhoven, Netherlands",TRUE,,ASML,1339.13
+6,Micron Technology,IDM (Design),$427.02,43.5303728,-116.1495199,United States,"8000 South Federal Way, Boise, Idaho, 83716, USA",TRUE,,MU,379.4
+7,SK Hynix,IDM (Design),$425.38,37.2489248,127.4819532,South Korea,"2091, Gyeongchung-daero, Bubal-eup, Icheon-si, Gyeonggi-do, 17336, South Korea",TRUE,,000660.KS,616.084
+8,AMD,Fabless (Design),$325.92,37.3829498,-121.9703754,United States,"2485 Augustine Drive, Santa Clara, California, 95054, USA",TRUE,,AMD,200.19
+9,Lam Research,Equipment (Manufacturing),$263.49,37.4885263,-121.9570265,United States,"4650 Cushing Parkway, Fremont, California, 94538, USA",TRUE,,LRCX,209.78
+10,Intel,IDM (Design),$242.77,37.3862051,-121.9636636,United States,"2200 Mission College Blvd, Santa Clara, California 95054-1549, USA",TRUE,Fab-lite,INTC,48.6
+11,Applied Materials,Equipment (Manufacturing),$236.21,37.3777843,-121.9792715,United States,"3050 Bowers Ave, Santa Clara, CA 95054",TRUE,,AMAT,297.6
+12,Texas Instruments,IDM (Design),$202.55,32.9112201,-96.7542503,United States,"12500 TI Blvd, Dallas, Texas, 75243",TRUE,,TXN,222.92
+13,KLA,Equipment (Manufacturing),$171.76,37.4210942,-121.9255574,United States,"3 Technology Drive, Milpitas, California 95035, USA",TRUE,,KLAC,1307.22
+14,QUALCOMM,Fabless (Design),$159.46,32.8961271,-117.1957412,United States,"5775 Morehouse Drive, San Diego, California, 92121, USA",TRUE,,QCOM,148.89
+15,Analog Devices,IDM (Design),$156.90,42.5311442,-71.1482917,United States,"1 Analog Way, Wilmington, MA 01887",TRUE,,ADI,320.44
+16,Tokyo Electron,Equipment (Manufacturing),$119.00,35.6732106,139.7364288,Japan,"Akasaka Biz Tower, 3-1 Akasaka 5-chome, Minato-ku, Tokyo 107-6325",TRUE,,8035.T,259.599
+17,Advantest,OSAT (ATP),$118.00,35.6836406,139.7655925,Japan,"Shin Marunouchi Center Bldg., 1-6-2, Marunouchi, Chiyoda-ku, Tokyo 100-0005",TRUE,,6857.T,162.489
+18,Arm Holdings,EDM & IP (Design),$111.30,52.181722,0.1787568,United Kingdom,"110 Fulbourn Road Cambridge, UK CB1 9NJ",TRUE,,ARM,104.9
+19,MediaTek,Fabless (Design),$90.83,24.7823005,121.0062859,Taiwan,"No.8, Dusing 1st Rd., Hsinchu Science Park, Hsinchu City 300, Taiwan",TRUE,,2454.TW,56.9062
+20,SMIC,Pureplay Foundry (Manufacturing),$85.06,31.2181,121.60866,China,"18 Zhangjiang Road, Pudong New Area, Shanghai, 201203, China",TRUE,,0981.HK,8.80084
+21,Synopsys,EDM & IP (Design),$80.16,37.3979952,-122.0323945,United States,"675 Almanor Ave Sunnyvale, CA 94085",TRUE,,SNPS,418.98
+,Cadence,EDM & IP (Design),$79.49,37.3956228,-121.9210068,United States,"2655 Seely Ave, San Jose, CA 95134, USA.",TRUE,,,
+22,Cambricon Technologies,Fabless (Design),$64.88,39.977613,116.352065,China,"Beijing, Zhizhen Building, No. 7 Zhichun Road, China",TRUE,,688256.SS,153.868
+23,Marvell Technology,Fabless (Design),$63.56,37.4111844,-121.9828692,United States,"5488 Marvell Lane, Santa Clara, California, 95054, USA",TRUE,,MRVL,73.73
+,Shin-Etsu,Wafer (Manufacturing),$61.94,35.6842777,139.7650482,Japan,"Marunouchi Eiraku Building, 4-1, Marunouchi 1-chome, Chiyoda-ku, Tokyo 100-0005",TRUE,Takes 29.4% market share,,
+24,Infineon,IDM (Design),$61.93,48.0802968,11.6146179,Germany,"Am Campeon 1-15, 85579 Neubiberg, Germany",TRUE,,IFX.DE,47.5631
+25,NXP Semiconductors,IDM (Design),$57.19,51.4089645,5.4603827,Netherlands,"High Tech Campus 60 Eindhoven, 5656 AG Netherlands",TRUE,,NXPI,226.86
+26,Monolithic Power Systems,Fabless (Design),$54.46,47.6599478,-122.2054651,United States,"5808 Lake Washington Blvd NE, Kirkland, Washington, 98033, USA",FALSE,,MPWR,1136.83
+27,NAURA Technology Group,Equipment (Manufacturing),$49.12,39.904211,116.407395,China,"No. 8 Wenchang Avenue Beijing Economic and Technological Development Zone Beijing, 100176. China",TRUE,,002371.SZ,67.8
+28,Disco Corp.,Equipment (Manufacturing),$47.13,35.5868586,139.7339948,Japan,"13-11 Omori-Kita 2-chome, Ota-ku, Tokyo 143-8580 Japan",TRUE,"ultra-precise cutting, grinding, and polishing systems",6146.T,434.622
+29,Microchip Technology,IDM (Design),$42.28,33.3038413,-111.8839384,United States,"2355 West Chandler Blvd. Chandler, Arizona, USA 85224-6199",FALSE,,MCHP,78.23
+30,ASE Group,OSAT (ATP),$41.43,22.6272784,120.3014353,Taiwan,"No. 26, Chin 3rd Road, Nantze Export Processing Zone, Kaohsiung 81146",FALSE,,ASX,18.99
+31,ASM International,Equipment (Manufacturing),$38.57,52.3492057,5.1894332,Netherlands,"Versterkerstraat 8, 1322 AP Almere, The Netherlands",TRUE,,ASM.AS,788.766
+32,Coherent Corp.,Equipment (Manufacturing),$33.16,40.7343563,-79.8195949,United States,"375 Saxonburg Boulevard, Saxonburg, PA, 16056",TRUE,,COHR,211
+33,AMEC,Equipment (Manufacturing),$31.50,31.22885,121.67931,China,"188 Taihua Road, Jinqiao Comprehensive Bonded Zone, Pudong New Area, Shanghai 201201",TRUE,,688012.SS,50.3112
+34,Renesas Electronics,IDM (Design),$29.70,35.6573821,139.7948584,Japan,"Toyosu Foresia, 3-2-24 Toyosu, Koto-ku, Tokyo 135-0061, Japan",FALSE,Fab-lite,6723.T,16.4179
+35,Nanya Technology,IDM (Design),$28.90,25.0483479,121.4149647,Taiwan,"No. 98, Nanlin Rd., Taishan Dist, New Taipei City 243, Taiwan",FALSE,DRAM,2408.TW,9.32629
+36,GigaDevice Semiconductor,Fabless (Design),$28.34,40.0742,116.24978,China,"Building 8, Zhongguancun Integrated Circuit Design Park, No. 9 Fenghao East Road, Haidian District, Beijing Municipality",FALSE,Memory: #1 fabless Flash provider,603986.SS,40.6757
+37,STMicroelectronics,IDM (Design),$26.49,46.1645186,6.1017261,Switzerland,"39 Chemin du Champ-des-Filles in Geneva, Switzerland",FALSE,"Europe’s largest semiconductor chip maker
+automotive, industrial, power, and IoT (internet of things) applications",STM,29.33
+38,ON Semiconductor,IDM (Design),$25.38,33.519555,-111.8893787,United States,"5701 N. Pima Road, Scottsdale, Arizona 85250, USA",FALSE,automotive and industrial end-markets,ON,62.06
+39,United Microelectronics,Pureplay Foundry (Manufacturing),$25.05,24.7823005,121.0062859,Taiwan,"No. 3, Li-Hsin 2nd Rd., Hsinchu Science Park, Hsinchu, Taiwan",TRUE,,UMC,9.95
+40,Astera Labs,Fabless (Design),$24.44,37.4042034,-121.9790734,United States,"2901 Tasman Drive Suite 205 Santa Clara, CA 95054 United States",FALSE,data center and AI infrastructure,ALAB,144.67
+41,GlobalFoundries,Pureplay Foundry (Manufacturing),$22.84,42.9705801,-73.7590016,United States,"400 Stonebreak Road Ext. Malta, NY 12020",FALSE,"specialized chips (22nm, 28nm, etc.) for automotive, IoT, data center, and mobile applications",GFS,41.1
+42,Qnity Electronics,Other,$20.01,39.7545834,-75.6046445,United States,"974 Centre Road, Building 735, Wilmington, DE 19805, USA",FALSE,Supplier for equipment companies,Q,95.51
+43,Credo Technology,Fabless (Design),$17.51,37.4032743,-121.9471512,United States,"110 Rio Robles, San Jose, California 95134, United States",FALSE,,CRDO,96.95
+44,Lasertec,IDM (Design),$17.13,35.5068803,139.6110182,Japan,"2-10-1 Shin-yokohama, Kohoku-ku, Yokohama 222-8552 Japan",FALSE,Fab-lite,6920.T,190.107
+45,Entegris,Other,$17.04,42.5489629,-71.2837088,United States,"129 Concord Road, Billerica, MA 01821, USA",FALSE,Supplier for wafer companies,ENTG,112.41
+46,VeriSilicon Microelectronics,Fabless (Design),$16.70,37.41961,-121.9739968,China,"2150 Gold Street, Suite 200 PO Box 1090, San Jose, CA",FALSE,,688521.SS,31.7533
+47,MACOM,IDM (Design),$16.13,42.6357772,-71.3160026,United States,"100 Chelmsford Street Lowell, MA, 01851 United States",FALSE,mature processes,MTSI,215.03
+48,BE Semiconductor,Other,$14.65,51.9609203,6.019889,Netherlands,Ratio 6 6921 RW Duiven The Netherlands,FALSE,ATP equipment,BESI.AS,185.922
+49,Tower Semiconductor,Pureplay Foundry (Manufacturing),$13.64,32.688821,35.2498611,Israel,"Ramat Gavriel Industrial Park 20 Shaul Amor Avenue P.O. Box 619 Migdal Haemek, 2310502 Israel",FALSE,,TSEM,121.28
+50,HANMI Semiconductor,Other,$13.15,37.4756775,126.6808839,South Korea,"14, Gajwa-ro 30beon-gil, Seo-gu, Incheon",FALSE,ATP equipment,042700.KS,138.619
+51,SCREEN Holdings,Equipment (Manufacturing),$12.64,35.0338801,135.7516371,Japan,"Tenjinkita-machi 1-1, Teranouchi-agaru 4-chome, Horikawa-dori, Kamigyo-ku, Kyoto, 602-8585, Japan",TRUE,,7735.T,133.722
+58,Amkor Technology,OSAT (ATP),$10.84,33.3355266,-111.8990921,United States,"2045 East Innovation Circle, Tempe, Arizona, 85284",TRUE,,AMKR,43.87
+73,GlobalWafers,Wafer (Manufacturing),$7.25,24.7823005,121.0062859,Taiwan,"No. 8, Gongye East 2nd Rd., Hsinchu Science Park, Hsinchu City, Hsinchu City, 300091 Taiwan",TRUE,,6488.TWO,15.1592
+91,Sumco Corporation,Wafer (Manufacturing),$3.61,35.6499636,139.7569483,Japan,"1-2-1 Shibaura, Minato-ku, Tokyo 105-8634",TRUE,,3436.T,10.333
+109,Photronics,Equipment (Manufacturing),$2.00,,,United States,,FALSE,,PLAB,33.93
+114,Siltronic,Wafer (Manufacturing),$1.71,48.1375703,11.6226634,Germany,"Einsteinstraße 172 81677 München, Germany",TRUE,,WAF.F,56.9271
+120,Soitec,Wafer (Manufacturing),$1.27,45.264005,5.877707,France,"Parc Technologique des Fontaines. 38190, Bernin",TRUE,,SOI.PA,35.662
+123,SÜSS MicroTec,Equipment (Manufacturing),$1.05,48.25045,11.6237853,Germany,Schleißheimer Str. 90. D 85748 Garching,TRUE,,SMHN.DE,54.7321

@@ -24,12 +24,6 @@
   </style>
 </head>
 <body class="m-0 bg-[#f7f7f9] text-[#20222a] leading-relaxed relative">
-    <!--
-    Fixed full-screen map layer.
-    - fixed inset-0 makes it cover the entire viewport
-    - z-[1] puts it behind the storytelling content (which is z-[2])
-    - aria-hidden because it’s a visual backdrop; the “story” is the main accessible content
-  -->
 
   <div id="map" class="fixed inset-0 w-full h-screen z-[1]" aria-hidden="true"></div>
   <!--
@@ -39,14 +33,14 @@
   -->
 
   <div class="relative z-[2]">
-        <!--
+    <!--
       Main scrollytelling column.
       - flex flex-col stacks sections vertically
       - min-h-[900vh] forces a very long scroll so you can trigger many map “scenes”
         (each section is like a checkpoint for a map camera move / highlight change)
     -->
     <main class="flex flex-col gap-0 min-h-[900vh]">
- 
+
       <!-- SCENE 0 (intro title screen) -->
       <section class="map-step relative min-h-[100vh] flex items-center justify-center p-4 sm:p-6 md:p-8" id="intro" data-scene="0">
         <div class="intro-card">
@@ -95,7 +89,7 @@
         </div>
       </section>
 
-       <!-- SCENE 2 (Design stage: text + infographic side by side) -->
+      <!-- SCENE 2 (Design stage: text + infographic side by side) -->
       <section class="map-step relative min-h-[100vh] flex items-center justify-center p-4 sm:p-6 md:p-8" data-scene="2">
         <div class="design-stage-row">
           <!-- Left: text card -->
@@ -128,7 +122,6 @@
         </div>
       </section>
 
-
       <!-- SCENE 4 (IC Design Revenue Share – country highlights + bar chart on map) -->
       <section class="map-step relative min-h-[100vh] flex items-end justify-start p-4 sm:p-6 md:p-8" data-scene="4">
         <div class="revenue-card">
@@ -145,6 +138,7 @@
           </div>
         </div>
       </section>
+
       <!-- SCENE 5 (US Fabless companies on California map) -->
       <section class="map-step relative min-h-[100vh] flex items-start justify-end p-4 sm:p-6 md:p-8" data-scene="5">
         <div class="fabless-scene-card">
@@ -172,7 +166,7 @@
       - Focus: EDA / IP firms (Synopsys, Cadence) and their market share.
       - Uses a different tag color (red) to distinguish “EDM & IP” as a category on the map/story.
       -->      
-    <section class="map-step relative min-h-[100vh] flex items-center justify-center p-4 sm:p-6 md:p-8" data-scene="6">
+      <section class="map-step relative min-h-[100vh] flex items-center justify-center p-4 sm:p-6 md:p-8" data-scene="6">
         <div class="eda-scene-card" style="margin-top: 12vh;">
           <h3 class="eda-scene-title">Key US EDA &amp; IP Companies</h3>
           <p class="eda-scene-text">
@@ -191,15 +185,15 @@
             Source: <a href="https://companiesmarketcap.com/semiconductors/largest-semiconductor-companies-by-market-cap/" target="_blank" rel="noopener noreferrer" class="underline decoration-dotted hover:text-blue-600">companiesmarketcap.com</a>
           </p>
         </div>
-    </section>
+      </section>
 
-    <!--
-      SCENE 9
-      - Focus: US IDMs (integrated device manufacturers).
-      - Text emphasizes geography/industrial constraints (fabs require land/utilities/zoning),
-        which pairs well with a map zoom showing scattered fab locations across states.
-    -->
-    <section class="map-step relative min-h-[100vh] flex items-center justify-center p-4 sm:p-6 md:p-8" data-scene="7">
+      <!--
+        SCENE 9
+        - Focus: US IDMs (integrated device manufacturers).
+        - Text emphasizes geography/industrial constraints (fabs require land/utilities/zoning),
+          which pairs well with a map zoom showing scattered fab locations across states.
+      -->
+      <section class="map-step relative min-h-[100vh] flex items-center justify-center p-4 sm:p-6 md:p-8" data-scene="7">
         <div class="idm-scene-card">
           <h3 class="idm-scene-title">Key US IDM Companies</h3>
           <p class="idm-scene-text">
@@ -218,15 +212,15 @@
             Source: <a href="https://companiesmarketcap.com/semiconductors/largest-semiconductor-companies-by-market-cap/" target="_blank" rel="noopener noreferrer" class="underline decoration-dotted hover:text-blue-600">companiesmarketcap.com</a>
           </p>
         </div>
-    </section>
+      </section>
 
-    <!--
-      SCENE 10
-      - Focus: Asia design ecosystem; mixes IDMs + fabless in the same region.
-      - Layout: justify-start places the main card to the left, leaving map context on the right.
-      - Tag stack: shows both IDM + Fabless labels together (visual legend for mixed categories).
-    -->
-    <section class="map-step relative min-h-[100vh] flex items-center justify-start p-4 sm:p-6 md:p-8" data-scene="8">
+      <!--
+        SCENE 10
+        - Focus: Asia design ecosystem; mixes IDMs + fabless in the same region.
+        - Layout: justify-start places the main card to the left, leaving map context on the right.
+        - Tag stack: shows both IDM + Fabless labels together (visual legend for mixed categories).
+      -->
+      <section class="map-step relative min-h-[100vh] flex items-center justify-start p-4 sm:p-6 md:p-8" data-scene="8">
         <div class="asia-scene-card">
           <h3 class="asia-scene-title">Key Asian Semiconductor Companies</h3>
           <p class="asia-scene-text">
@@ -255,50 +249,121 @@
             Source: <a href="https://companiesmarketcap.com/semiconductors/largest-semiconductor-companies-by-market-cap/" target="_blank" rel="noopener noreferrer" class="underline decoration-dotted hover:text-blue-600">companiesmarketcap.com</a>
           </p>
         </div>
-    </section>
+      </section>
 
-    <!--
-      SCENE 11
-      - Focus: Europe’s role (IP/EDA + IDMs).
-      - Layout: justify-end puts the card on the right side, leaving map context visible on the left.
-      - Dual tags: EDM & IP + IDM reinforces Europe’s “strength in tools/IP + industrial chips” framing.
-    -->
-    <section class="map-step relative min-h-[100vh] flex items-center justify-end p-4 sm:p-6 md:p-8" data-scene="9">
+      <!--
+        SCENE 11
+        - Focus: Europe’s role (IP/EDA + IDMs).
+        - Layout: justify-end puts the card on the right side, leaving map context visible on the left.
+        - Dual tags: EDM & IP + IDM reinforces Europe’s “strength in tools/IP + industrial chips” framing.
+      -->
+      <section class="map-step relative min-h-[100vh] flex items-center justify-end p-4 sm:p-6 md:p-8" data-scene="9">
         <div class="bg-white/95 border border-[#111827] rounded-2xl px-5 py-5 sm:px-10 sm:py-7 shadow-[0_18px_45px_rgba(0,0,0,0.24)] max-w-[60%] sm:max-w-1xl md:max-w-2xl lg:max-w-3xl">
-            <p class="text-base sm:text-lg md:text-xl font-semibold text-[#111827] leading-relaxed text-left">
-                Europe plays a quieter but strategically important role in semiconductor design. While it does not lead in advanced logic fabrication, the region has strong footholds in IP cores, EDA tools, automotive semiconductors, and industrial electronics.              </p>
-             <br>
-            <p class="text-base sm:text-lg md:text-xl font-semibold text-[#111827] leading-relaxed text-left">
-                Key companies include Arm Holdings in the U.K., Siemens (EDA) in Germany, and IDMs such as NXP Semiconductors (Netherlands)  and Infineon Technologies (Germany).
-            </p>   
-          </div>
-          <div class="pointer-events-none absolute left-4 bottom-4 sm:left-8 sm:bottom-6 flex flex-col gap-3 items-start">
-            <div class="flex flex-row gap-2">
-                <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#e06666] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#e5e7eb]">
-                    <span class="text-base sm:text-lg font-semibold tracking-wide text-[#374151]">
-                        EDM & IP
-                    </span>
-                    </div>
-    
-                <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#b4a7d6] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#e5e7eb]">
-                    <span class="text-base sm:text-lg font-semibold tracking-wide text-[#374151]">
-                      IDM
-                    </span>
-                  </div>
+          <p class="text-base sm:text-lg md:text-xl font-semibold text-[#111827] leading-relaxed text-left">
+            Europe plays a quieter but strategically important role in semiconductor design. While it does not lead in advanced logic fabrication, the region has strong footholds in IP cores, EDA tools, automotive semiconductors, and industrial electronics.              </p>
+          <br>
+          <p class="text-base sm:text-lg md:text-xl font-semibold text-[#111827] leading-relaxed text-left">
+            Key companies include Arm Holdings in the U.K., Siemens (EDA) in Germany, and IDMs such as NXP Semiconductors (Netherlands)  and Infineon Technologies (Germany).
+          </p>
+        </div>
+        <div class="pointer-events-none absolute left-4 bottom-4 sm:left-8 sm:bottom-6 flex flex-col gap-3 items-start">
+          <div class="flex flex-row gap-2">
+            <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#e06666] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#e5e7eb]">
+              <span class="text-base sm:text-lg font-semibold tracking-wide text-[#374151]">
+                EDM & IP
+              </span>
             </div>
-            <p class="pointer-events-auto text-[10px] sm:text-xs text-[#6b7280]">
-              Source: 
-              <span class="underline decoration-dotted">
-                https://companiesmarketcap.com/semiconductors/largest-semiconductor-companies-by-market-cap/
-            </span>
-            </p>
-</div> </section> </main> </div> <!-- TopoJSON client: converts world-atlas TopoJSON → GeoJSON for country boundaries --> <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
 
-<!-- MapLibre JS: provides the map engine that attaches to #map and supports camera/layer changes -->
+            <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#b4a7d6] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#e5e7eb]">
+              <span class="text-base sm:text-lg font-semibold tracking-wide text-[#374151]">
+                IDM
+              </span>
+            </div>
+          </div>
+          <p class="pointer-events-auto text-[10px] sm:text-xs text-[#6b7280]">
+            Source:
+            <span class="underline decoration-dotted">
+              https://companiesmarketcap.com/semiconductors/largest-semiconductor-companies-by-market-cap/
+            </span>
+          </p>
+        </div>
+      </section>
+
+      <!-- FINAL SECTION: Independent interactive map (full-section) -->
+      <!-- Keep .map-step so scroll-snap doesn't "jump" back -->
+      <section class="map-step relative min-h-[100vh] h-[100vh] p-0" data-scene="9">
+        <div
+          id="interactive-map"
+          class="absolute inset-0 w-full h-full bg-white"
+          style="touch-action: pan-y; overscroll-behavior: contain;"
+          aria-label="Interactive world map"
+        ></div>
+
+        <div class="pointer-events-none absolute right-0 bottom-0 p-4 sm:p-6 md:p-8 flex justify-end">
+          <div id="interactive-map-info" class="relative">
+            <!-- Expanded card -->
+            <div
+              id="interactive-map-info-expanded"
+              class="pointer-events-auto revenue-card"
+              style="position: relative; right: auto; bottom: auto; margin-left: 0; max-width: 720px;"
+            >
+              <!-- Collapse chevron (top-right) -->
+              <button
+                id="interactive-map-info-collapse"
+                type="button"
+                aria-label="Collapse info"
+                class="absolute top-3 right-3 inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/10 border border-[rgba(255,215,0,0.35)] hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-[#ffd700]"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M6 9l6 6 6-6" stroke="#ffd700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+
+              <h3 class="revenue-card-title pr-12">Overview of the World’s Top 50+ Semiconductor Companies</h3>
+              <div class="revenue-card-source">
+                <p class="revenue-card-note">* Does not capture the design value created and used solely within the same firm (e.g., IDM companies that own their own IP).</p>
+                <p class="revenue-card-link">
+                  Source:
+                  <a
+                    href="https://companiesmarketcap.com/semiconductors/largest-semiconductor-companies-by-market-cap/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="underline decoration-dotted hover:text-blue-200"
+                  >companiesmarketcap.com</a>
+                </p>
+              </div>
+            </div>
+
+            <!-- Collapsed icon button -->
+            <button
+              id="interactive-map-info-collapsed"
+              type="button"
+              aria-label="Show info"
+              class="pointer-events-auto hidden w-12 h-12 rounded-full bg-[#1a3a6e] border-[3px] border-[#ffd700] shadow-[0_18px_45px_rgba(0,0,0,0.24)] inline-flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-[#ffd700]"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" stroke="#ffd700" stroke-width="2"/>
+                <path d="M12 10.5v6" stroke="#ffd700" stroke-width="2" stroke-linecap="round"/>
+                <path d="M12 7.5h.01" stroke="#ffd700" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- TopoJSON client: converts TopoJSON → GeoJSON -->
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+
+  <!-- MapLibre GL JS: provides the map engine -->
   <script src="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.js"></script>
-  <!--
-    Your custom script (deferred so HTML loads first).
-  -->
-  <script defer src="./script.js"></script>
+
+  <!-- Module entrypoints -->
+  <!-- - `js/scrolly-map/index.js`: background scrollytelling map + scenes -->
+  <!-- - `js/interactive-map/index.js`: final-section interactive map + CSV points -->
+  <script type="module" src="./js/scrolly-map/index.js"></script>
+  <script type="module" src="./js/interactive-map/index.js"></script>
 </body>
 </html>
