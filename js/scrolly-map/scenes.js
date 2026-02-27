@@ -75,7 +75,7 @@ export const scenes = [
     title: "Europe EDA & IDM Cluster",
     description: "Zoom into key European EDA/IP and IDM players",
     center: [8, 51],
-    zoom: 5.5,
+    zoom: 4.2,
     pitch: 0,
     bearing: 0,
   },

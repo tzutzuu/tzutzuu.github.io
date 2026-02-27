@@ -485,6 +485,35 @@ main {
   line-height: 1.6;
 }
 
+/* ── Europe scene card (right, Scene 9) ── */
+.europe-scene-card {
+  background: #1a3a6e !important;
+  border: 3px solid #ffd700 !important;
+  border-radius: 12px;
+  padding: 1.6rem 2rem;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: var(--shadow);
+  text-align: left;
+  position: relative;
+  z-index: 10;
+}
+
+.europe-scene-card .europe-scene-title {
+  color: #ffd700 !important;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 0.8rem;
+  line-height: 1.3;
+}
+
+.europe-scene-card .europe-scene-text {
+  color: #ffffff !important;
+  font-size: 0.95rem;
+  margin: 0 0 0.5rem;
+  line-height: 1.6;
+}
+
 /* ── Asia fabless card markers (gold) ── */
 .asia-fabless-card-marker {
   background: #f0ff53;

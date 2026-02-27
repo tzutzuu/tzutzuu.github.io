@@ -113,10 +113,10 @@ export const idmUsGeoJson = {
 };
 
 export const idmCardData = [
-  { name: "Intel", rank: 10, marketcap: "$242.77B", coords: [-121.97, 37.37], anchor: "top" },
-  { name: "Micron Technology", rank: 6, marketcap: "$427.01B", coords: [-116.2, 43.6], anchor: "bottom" },
-  { name: "Texas Instruments", rank: 12, marketcap: "$202.55B", coords: [-96.77, 32.91], anchor: "top" },
-  { name: "Analog Devices", rank: 15, marketcap: "$156.9B", coords: [-71.17, 42.56], anchor: "bottom" },
+  { name: "Intel", rank: 10, marketcap: "$242.77B", coords: [-121.97, 37.37], anchor: "top", offsetX: 0, offsetY: 1.5 },
+  { name: "Micron Technology", rank: 6, marketcap: "$427.01B", coords: [-116.2, 43.6], anchor: "bottom", offsetX: 0, offsetY: -1.5 },
+  { name: "Texas Instruments", rank: 12, marketcap: "$202.55B", coords: [-96.77, 32.91], anchor: "bottom", offsetX: 0, offsetY: -1.5 },
+  { name: "Analog Devices", rank: 15, marketcap: "$156.9B", coords: [-71.17, 42.56], anchor: "bottom", offsetX: 0, offsetY: -1.3 },
 ];
 
 export const asiaSemiGeoJson = {
@@ -137,23 +137,37 @@ export const asiaCountryHighlightIds = {
   156: { name: "China", color: "#dc2626" },
 };
 
+export const europeCountryHighlightIds = {
+  826: { name: "United Kingdom", color: "#ffd561" },
+  276: { name: "Germany", color: "#00a7b0" },
+  756: { name: "Switzerland", color: "#ec4899" },
+  528: { name: "Netherlands", color: "#53cbff" },
+};
+
 export const asiaCardData = [
-  { name: "Samsung", rank: 4, marketcap: "$773.95B", kind: "idm", coords: [127.02, 37.26], anchor: "bottom" },
-  { name: "SK Hynix", rank: 7, marketcap: "$425.38B", kind: "idm", coords: [127.43, 37.27], anchor: "top" },
-  { name: "Sony", rank: null, marketcap: "$166.23B", kind: "idm", coords: [139.586792, 35.400372], anchor: "top" },
-  { name: "MediaTek", rank: 19, marketcap: "$90.83B", kind: "fabless", coords: [120.97, 24.81], anchor: "top" },
-  { name: "Cambricon Technologies", rank: 22, marketcap: "$64.89B", kind: "fabless", coords: [116.4, 39.9], anchor: "bottom" },
+  { name: "Samsung", rank: 4, marketcap: "$773.95B", kind: "idm", coords: [127.02, 37.26], anchor: "top", offsetX: 0, offsetY: 1.5 },
+  { name: "SK Hynix", rank: 7, marketcap: "$425.38B", kind: "idm", coords: [127.43, 37.27], anchor: "bottom", offsetX: 0, offsetY: -1.5 },
+  { name: "Sony", rank: null, marketcap: "$166.23B", kind: "idm", coords: [139.586792, 35.400372], anchor: "bottom", offsetX: 0, offsetY: -1.5 },
+  { name: "MediaTek", rank: 19, marketcap: "$90.83B", kind: "fabless", coords: [120.97, 24.81], anchor: "top", offsetX: 0, offsetY: 1.5 },
+  { name: "Cambricon Technologies", rank: 22, marketcap: "$64.89B", kind: "fabless", coords: [116.4, 39.9], anchor: "top", offsetX: 0, offsetY: 1.5 },
 ];
 
 export const europeSemiGeoJson = {
   type: "FeatureCollection",
   features: [
-    { type: "Feature", properties: { name: "Arm Holdings", label: "$148.53B\n(World No.15)\nArm Holdings", kind: "edmip" }, geometry: { type: "Point", coordinates: [0.13, 52.2] } },
-    { type: "Feature", properties: { name: "Siemens", label: "$213.37B\nSiemens", kind: "edmip" }, geometry: { type: "Point", coordinates: [11.58, 48.13] } },
-    { type: "Feature", properties: { name: "NXP Semiconductors", label: "$58.53B\n(World No.24)\nNXP Semiconductors", kind: "idm" }, geometry: { type: "Point", coordinates: [5.48, 51.44] } },
-    { type: "Feature", properties: { name: "Infineon", label: "$57.48B\n(World No.25)\nInfineon", kind: "idm" }, geometry: { type: "Point", coordinates: [11.65, 48.08] } },
+    { type: "Feature", properties: { name: "Arm Holdings", rank: 18, marketcap: "$111.3B", kind: "eda" }, geometry: { type: "Point", coordinates: [0.1787568, 52.181722] } },
+    { type: "Feature", properties: { name: "Infineon", rank: 24, marketcap: "$61.93B", kind: "idm" }, geometry: { type: "Point", coordinates: [11.6146179, 48.0802968] } },
+    { type: "Feature", properties: { name: "NXP Semiconductors", rank: 25, marketcap: "$57.19B", kind: "idm" }, geometry: { type: "Point", coordinates: [5.4603827, 51.4089645] } },
+    { type: "Feature", properties: { name: "STMicroelectronics", rank: 37, marketcap: "$26.48B", kind: "idm" }, geometry: { type: "Point", coordinates: [6.1017261, 46.1645186] } },
   ],
 };
+
+export const europeCardData = [
+  { name: "Arm Holdings", rank: 18, marketcap: "$111.3B", kind: "eda", coords: [0.1787568, 52.181722], anchor: "bottom", offsetX: 0, offsetY: -1.5 },
+  { name: "Infineon", rank: 24, marketcap: "$61.93B", kind: "idm", coords: [11.6146179, 48.0802968], anchor: "top", offsetX: 0, offsetY: 1.5 },
+  { name: "NXP Semiconductors", rank: 25, marketcap: "$57.19B", kind: "idm", coords: [5.4603827, 51.4089645], anchor: "top", offsetX: 0, offsetY: 1.5 },
+  { name: "STMicroelectronics", rank: 37, marketcap: "$26.48B", kind: "idm", coords: [6.1017261, 46.1645186], anchor: "bottom", offsetX: 0, offsetY: -1.5 },
+];
 
 export const fablessUsLinesGeoJson = {
   type: "FeatureCollection",

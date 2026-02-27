@@ -11,6 +11,8 @@ import {
   asiaCountryHighlightIds,
   asiaCardData,
   europeSemiGeoJson,
+  europeCardData,
+  europeCountryHighlightIds,
   fablessUsLinesGeoJson,
   fablessCardData,
   countryHighlightIds,
@@ -27,6 +29,7 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 let edaCardMarkers = [];
 let idmCardMarkers = [];
 let asiaCardMarkers = [];
+let europeCardMarkers = [];
 let fablessCardMarkers = [];
 let barMarkers = [];
 
@@ -114,7 +117,7 @@ map.on("load", () => {
     source: "fabless-us",
     layout: { visibility: "none" },
     paint: {
-      "circle-radius": 10,
+      "circle-radius": 12,
       "circle-color": "#f0ff53",
       "circle-stroke-color": "#1a3a6e",
       "circle-stroke-width": 2,
@@ -154,6 +157,90 @@ map.on("load", () => {
       });
     })
     .catch((err) => console.warn("Failed to load California boundary:", err));
+    
+  // Add US country border for IDM scene - Fixed filtering
+  fetch("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json")
+    .then((r) => r.json())
+    .then((world) => {
+      const countries = topojson.feature(world, world.objects.countries);
+      
+      // Debug: log first few countries to see structure
+      console.log("Sample country properties:", countries.features.slice(0, 3).map(f => ({ id: f.id, properties: f.properties })));
+      
+      // Try multiple approaches to find US
+      const unitedStates = {
+        type: "FeatureCollection",
+        features: countries.features.filter((f) => {
+          return f.id === 840 || // Numeric ID
+                 f.id === "840" || // String ID
+                 (f.properties && f.properties.NAME === "United States") ||
+                 (f.properties && f.properties.NAME_EN === "United States") ||
+                 (f.properties && f.properties.NAME_LONG === "United States of America") ||
+                 (f.properties && f.properties.ADMIN === "United States of America");
+        }),
+      };
+
+      console.log("Found US features:", unitedStates.features.length);
+      if (unitedStates.features.length > 0) {
+        console.log("US feature properties:", unitedStates.features[0].properties);
+      }
+
+      if (unitedStates.features.length > 0) {
+        map.addSource("us-boundary", { type: "geojson", data: unitedStates });
+        map.addLayer({
+          id: "us-fill",
+          type: "fill",
+          source: "us-boundary",
+          layout: { visibility: "none" },
+          paint: { "fill-color": "#1a3a6e", "fill-opacity": 0.15 },
+        });
+        map.addLayer({
+          id: "us-border",
+          type: "line",
+          source: "us-boundary",
+          layout: { visibility: "none" },
+          paint: { "line-color": "#1a3a6e", "line-width": 3, "line-dasharray": [4, 3] },
+        });
+        // Move IDM dots above US borders
+        if (map.getLayer("idm-us-dots")) {
+          map.moveLayer("idm-us-dots");
+        }
+        
+        console.log("US boundary layers added successfully");
+      } else {
+        // Fallback: Create a simple US outline from coordinates
+        console.warn("No US features found, using fallback boundary");
+        const usFallback = {
+          type: "FeatureCollection",
+          features: [{
+            type: "Feature",
+            geometry: {
+              type: "Polygon",
+              coordinates: [[
+                [-180, 71], [-180, 18], [-60, 18], [-60, 71], [-180, 71]
+              ]]
+            }
+          }]
+        };
+        
+        map.addSource("us-boundary", { type: "geojson", data: usFallback });
+        map.addLayer({
+          id: "us-fill",
+          type: "fill",
+          source: "us-boundary",
+          layout: { visibility: "none" },
+          paint: { "fill-color": "#1a3a6e", "fill-opacity": 0.15 },
+        });
+        map.addLayer({
+          id: "us-border",
+          type: "line",
+          source: "us-boundary",
+          layout: { visibility: "none" },
+          paint: { "line-color": "#1a3a6e", "line-width": 3, "line-dasharray": [4, 3] },
+        });
+      }
+    })
+    .catch((err) => console.warn("Failed to load US boundary:", err));
 
   map.addSource("california-cities", { type: "geojson", data: californiaCitiesGeoJson });
   map.addLayer({
@@ -194,7 +281,7 @@ map.on("load", () => {
     type: "circle",
     source: "eda-ip-us",
     layout: { visibility: "none" },
-    paint: { "circle-radius": 14, "circle-color": "#ea9999", "circle-stroke-color": "#1a3a6e", "circle-stroke-width": 2 },
+    paint: { "circle-radius": 12, "circle-color": "#ea9999", "circle-stroke-color": "#1a3a6e", "circle-stroke-width": 2 },
   });
 
   map.addSource("eda-lines", { type: "geojson", data: edaLinesGeoJson });
@@ -246,7 +333,7 @@ map.on("load", () => {
     type: "circle",
     source: "idm-us",
     layout: { visibility: "none" },
-    paint: { "circle-radius": 14, "circle-color": "#e9bcff", "circle-stroke-color": "#1a3a6e", "circle-stroke-width": 2 },
+    paint: { "circle-radius": 12, "circle-color": "#e9bcff", "circle-stroke-color": "#1a3a6e", "circle-stroke-width": 2 },
   });
 
   idmCardData.forEach((item) => {
@@ -257,7 +344,12 @@ map.on("load", () => {
       <div class="idm-card-marker-name">${item.name} (#${item.rank})</div>
       <div class="idm-card-marker-cap">${item.marketcap}</div>
     `;
-    const marker = new maplibregl.Marker({ element: el, anchor: item.anchor }).setLngLat(item.coords).addTo(map);
+    // Apply custom offset if provided, otherwise use original coords
+    const offsetCoords = [
+      item.coords[0] + (item.offsetX || 0), 
+      item.coords[1] + (item.offsetY || 0)
+    ];
+    const marker = new maplibregl.Marker({ element: el, anchor: "center" }).setLngLat(offsetCoords).addTo(map);
     idmCardMarkers.push(marker);
   });
 
@@ -268,7 +360,7 @@ map.on("load", () => {
     source: "asia-semi",
     layout: { visibility: "none" },
     paint: {
-      "circle-radius": 14,
+      "circle-radius": 12,
       "circle-color": ["case", ["==", ["get", "kind"], "fabless"], "#f0ff53", "#e9bcff"],
       "circle-stroke-color": "#1a3a6e",
       "circle-stroke-width": 2,
@@ -284,7 +376,12 @@ map.on("load", () => {
       <div class="${el.className}-name">${item.name}${rankText}</div>
       <div class="${el.className}-cap">${item.marketcap}</div>
     `;
-    const marker = new maplibregl.Marker({ element: el, anchor: item.anchor }).setLngLat(item.coords).addTo(map);
+    // Apply custom offset if provided, otherwise use original coords
+    const offsetCoords = [
+      item.coords[0] + (item.offsetX || 0), 
+      item.coords[1] + (item.offsetY || 0)
+    ];
+    const marker = new maplibregl.Marker({ element: el, anchor: "center" }).setLngLat(offsetCoords).addTo(map);
     asiaCardMarkers.push(marker);
   });
 
@@ -318,9 +415,49 @@ map.on("load", () => {
         layout: { visibility: "none" },
         paint: { "line-color": ["get", "highlightColor"], "line-width": 2.5 },
       });
+      // Move asia dots above borders
+      if (map.getLayer("asia-semi-dots")) {
+        map.moveLayer("asia-semi-dots");
+      }
     })
     .catch((err) => console.warn("Failed to load Asia country boundaries:", err));
+  // Europe country highlights
+  fetch("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json")
+    .then((r) => r.json())
+    .then((world) => {
+      const countries = topojson.feature(world, world.objects.countries);
+      const europeTargetIds = new Set(Object.keys(europeCountryHighlightIds).map(Number));
+      const europeHighlighted = {
+        type: "FeatureCollection",
+        features: countries.features
+          .filter((f) => europeTargetIds.has(Number(f.id)))
+          .map((f) => {
+            const info = europeCountryHighlightIds[Number(f.id)];
+            return { ...f, properties: { ...f.properties, highlightColor: info.color, name: info.name } };
+          }),
+      };
 
+      map.addSource("europe-country-highlights", { type: "geojson", data: europeHighlighted });
+      map.addLayer({
+        id: "europe-country-fills",
+        type: "fill",
+        source: "europe-country-highlights",
+        layout: { visibility: "none" },
+        paint: { "fill-color": ["get", "highlightColor"], "fill-opacity": 0.12 },
+      });
+      map.addLayer({
+        id: "europe-country-borders",
+        type: "line",
+        source: "europe-country-highlights",
+        layout: { visibility: "none" },
+        paint: { "line-color": ["get", "highlightColor"], "line-width": 2.5, "line-dasharray": [3, 2] },
+      });
+      // Move europe dots above borders
+      if (map.getLayer("europe-semi-dots")) {
+        map.moveLayer("europe-semi-dots");
+      }
+    })
+    .catch((err) => console.warn("Failed to load Europe country highlights:", err));
   map.addSource("europe-semi", { type: "geojson", data: europeSemiGeoJson });
   map.addLayer({
     id: "europe-semi-dots",
@@ -328,12 +465,31 @@ map.on("load", () => {
     source: "europe-semi",
     layout: { visibility: "none" },
     paint: {
-      "circle-radius": 16,
-      "circle-color": ["case", ["==", ["get", "kind"], "edmip"], "#e06666", "#b4a7d6"],
-      "circle-stroke-color": "#4b5563",
-      "circle-stroke-width": 1.5,
+      "circle-radius": 12,
+      "circle-color": ["case", ["==", ["get", "kind"], "eda"], "#ea9999", "#e9bcff"],
+      "circle-stroke-width": 2,
+      "circle-stroke-color": "#1a3a6e",
     },
   });
+
+  // Europe card markers
+  europeCardData.forEach((item) => {
+    const el = document.createElement("div");
+    el.className = item.kind === "eda" ? "eda-card-marker" : "idm-card-marker";
+    el.style.display = "none";
+    el.innerHTML = `
+      <div class="${el.className}-name">${item.name} (#${item.rank})</div>
+      <div class="${el.className}-cap">${item.marketcap}</div>
+    `;
+    // Apply custom offset if provided, otherwise use original coords
+    const offsetCoords = [
+      item.coords[0] + (item.offsetX || 0), 
+      item.coords[1] + (item.offsetY || 0)
+    ];
+    const marker = new maplibregl.Marker({ element: el, anchor: "center" }).setLngLat(offsetCoords).addTo(map);
+    europeCardMarkers.push(marker);
+  });
+
   map.addLayer({
     id: "europe-semi-labels",
     type: "symbol",
@@ -486,6 +642,15 @@ function setupScrollObserver() {
         idmCardMarkers.forEach((m) => {
           m.getElement().style.display = currentScene === 7 ? "block" : "none";
         });
+        // Show US border for IDM scene
+        if (map.getLayer("us-fill")) {
+          map.setLayoutProperty("us-fill", "visibility", idmVisibility);
+          console.log(`US fill visibility set to: ${idmVisibility}`);
+        }
+        if (map.getLayer("us-border")) {
+          map.setLayoutProperty("us-border", "visibility", idmVisibility);
+          console.log(`US border visibility set to: ${idmVisibility}`);
+        }
       }
       if (map.getLayer("asia-semi-dots")) {
         const asiaVisibility = currentScene === 8 ? "visible" : "none";
@@ -496,10 +661,15 @@ function setupScrollObserver() {
           m.getElement().style.display = currentScene === 8 ? "block" : "none";
         });
       }
-      if (map.getLayer("europe-semi-dots") && map.getLayer("europe-semi-labels")) {
+      if (map.getLayer("europe-semi-dots")) {
         const euVisibility = currentScene === 9 ? "visible" : "none";
         map.setLayoutProperty("europe-semi-dots", "visibility", euVisibility);
-        map.setLayoutProperty("europe-semi-labels", "visibility", euVisibility);
+        europeCardMarkers.forEach((m) => {
+          m.getElement().style.display = currentScene === 9 ? "block" : "none";
+        });
+        // Show Europe country borders for Europe scene
+        if (map.getLayer("europe-country-fills")) map.setLayoutProperty("europe-country-fills", "visibility", euVisibility);
+        if (map.getLayer("europe-country-borders")) map.setLayoutProperty("europe-country-borders", "visibility", euVisibility);
       }
     }
 
