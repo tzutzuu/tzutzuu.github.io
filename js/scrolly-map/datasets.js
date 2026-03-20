@@ -209,3 +209,31 @@ export const californiaCitiesGeoJson = {
   ],
 };
 
+// Advanced processes market share 2024 (scene 13)
+export const advancedProcessCountryHighlightIds = {
+  158: { name: "Taiwan", value: 66, color: "#16a34a", coords: [121, 21] },
+  840: { name: "United States", value: 10, color: "#1a3a6e", coords: [-98, 39] },
+  410: { name: "South Korea", value: 11, color: "#2563eb", coords: [129, 35] },
+  156: { name: "China", value: 9, color: "#dc2626", coords: [103, 32] },
+  392: { name: "Japan", value: 0, color: "#ea580c", coords: [142, 37] },
+};
+
+export const advancedProcessExtraBars = [
+  { name: "Europe", value: 0, color: "#9ca3af", coords: [15, 50] },
+  { name: "Rest of World", value: 4, color: "#9ca3af", coords: [60, -8] },
+];
+
+// Mature processes market share 2024 (scene 14)
+export const matureProcessCountryHighlightIds = {
+  158: { name: "Taiwan", value: 42, color: "#16a34a", coords: [121, 21] },
+  840: { name: "United States", value: 4, color: "#1a3a6e", coords: [-98, 39] },
+  410: { name: "South Korea", value: 9, color: "#2563eb", coords: [129, 35] },
+  156: { name: "China", value: 33, color: "#dc2626", coords: [103, 32] },
+  392: { name: "Japan", value: 3, color: "#ea580c", coords: [142, 37] },
+};
+
+export const matureProcessExtraBars = [
+  { name: "Europe", value: 0, color: "#9ca3af", coords: [15, 50] },
+  { name: "Rest of World", value: 8, color: "#9ca3af", coords: [60, -8] },
+];
+

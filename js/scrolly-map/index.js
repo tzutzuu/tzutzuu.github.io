@@ -18,6 +18,10 @@ import {
   countryHighlightIds,
   restOfWorldBar,
   californiaCitiesGeoJson,
+  advancedProcessCountryHighlightIds,
+  advancedProcessExtraBars,
+  matureProcessCountryHighlightIds,
+  matureProcessExtraBars,
 } from "./datasets.js";
 
 // Scrollytelling (fixed) MapLibre map used by the main story sections.
@@ -32,6 +36,8 @@ let asiaCardMarkers = [];
 let europeCardMarkers = [];
 let fablessCardMarkers = [];
 let barMarkers = [];
+let advancedBarMarkers = [];
+let matureBarMarkers = [];
 
 const map = new maplibregl.Map({
   container: "map",
@@ -565,6 +571,109 @@ map.on("load", () => {
     barMarkers.push(marker);
   });
 
+  // Advanced process market share 2024 (scene 13) – country fills
+  fetch("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json")
+    .then((r) => r.json())
+    .then((world) => {
+      const countries = topojson.feature(world, world.objects.countries);
+      const advTargetIds = new Set(Object.keys(advancedProcessCountryHighlightIds).map(Number));
+      const advHighlighted = {
+        type: "FeatureCollection",
+        features: countries.features
+          .filter((f) => advTargetIds.has(Number(f.id)))
+          .map((f) => {
+            const info = advancedProcessCountryHighlightIds[Number(f.id)];
+            return { ...f, properties: { ...f.properties, highlightColor: info.color, name: info.name } };
+          }),
+      };
+
+      map.addSource("adv-country-highlights", { type: "geojson", data: advHighlighted });
+      map.addLayer({
+        id: "adv-country-fills",
+        type: "fill",
+        source: "adv-country-highlights",
+        layout: { visibility: "none" },
+        paint: { "fill-color": ["get", "highlightColor"], "fill-opacity": 0.25 },
+      });
+      map.addLayer({
+        id: "adv-country-borders",
+        type: "line",
+        source: "adv-country-highlights",
+        layout: { visibility: "none" },
+        paint: { "line-color": ["get", "highlightColor"], "line-width": 2.5 },
+      });
+    })
+    .catch((err) => console.warn("Failed to load advanced process country boundaries:", err));
+
+  // Advanced process bar markers
+  const advMaxBarHeight = 140;
+  const advAllBarData = [...Object.values(advancedProcessCountryHighlightIds), ...advancedProcessExtraBars];
+  advAllBarData.forEach((item) => {
+    const barHeight = Math.max(2, Math.round((item.value / 66) * advMaxBarHeight));
+    const el = document.createElement("div");
+    el.className = "revenue-bar-marker";
+    el.style.display = "none";
+    el.innerHTML = `
+      <div class="revenue-bar-value">${item.value}%</div>
+      <div class="revenue-bar" style="height:${barHeight}px;background:${item.color};"></div>
+      <div class="revenue-bar-label">${item.name}</div>
+    `;
+    const marker = new maplibregl.Marker({ element: el, anchor: "bottom" }).setLngLat(item.coords).addTo(map);
+    advancedBarMarkers.push(marker);
+  });
+
+  // Mature process market share 2024 (scene 14) – country fills
+  fetch("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json")
+    .then((r) => r.json())
+    .then((world) => {
+      const countries = topojson.feature(world, world.objects.countries);
+      const matTargetIds = new Set(Object.keys(matureProcessCountryHighlightIds).map(Number));
+      const matHighlighted = {
+        type: "FeatureCollection",
+        features: countries.features
+          .filter((f) => matTargetIds.has(Number(f.id)))
+          .map((f) => {
+            const info = matureProcessCountryHighlightIds[Number(f.id)];
+            return { ...f, properties: { ...f.properties, highlightColor: info.color, name: info.name } };
+          }),
+      };
+
+      map.addSource("mat-country-highlights", { type: "geojson", data: matHighlighted });
+      map.addLayer({
+        id: "mat-country-fills",
+        type: "fill",
+        source: "mat-country-highlights",
+        layout: { visibility: "none" },
+        paint: { "fill-color": ["get", "highlightColor"], "fill-opacity": 0.25 },
+      });
+      map.addLayer({
+        id: "mat-country-borders",
+        type: "line",
+        source: "mat-country-highlights",
+        layout: { visibility: "none" },
+        paint: { "line-color": ["get", "highlightColor"], "line-width": 2.5 },
+      });
+    })
+    .catch((err) => console.warn("Failed to load mature process country boundaries:", err));
+
+  // Mature process bar markers
+  const matMaxBarHeight = 160;
+  const matReferenceMaxValue = 66;
+  const matAllBarData = [...Object.values(matureProcessCountryHighlightIds), ...matureProcessExtraBars];
+  matAllBarData.forEach((item) => {
+    const barHeight = Math.max(2, Math.round((item.value / matReferenceMaxValue) * matMaxBarHeight));
+    const el = document.createElement("div");
+    el.className = "revenue-bar-marker";
+    el.style.display = "none";
+    el.innerHTML = `
+      <div class="revenue-bar-value">${item.value}%</div>
+      <div class="revenue-bar" style="height:${barHeight}px;background:${item.color};"></div>
+      <div class="revenue-bar-label">${item.name}</div>
+    `;
+    const marker = new maplibregl.Marker({ element: el, anchor: "bottom" }).setLngLat(item.coords).addTo(map);
+    matureBarMarkers.push(marker);
+  });
+
   applyScene(0, { instant: true });
   setupScrollObserver();
 });
@@ -671,6 +780,24 @@ function setupScrollObserver() {
         if (map.getLayer("europe-country-fills")) map.setLayoutProperty("europe-country-fills", "visibility", euVisibility);
         if (map.getLayer("europe-country-borders")) map.setLayoutProperty("europe-country-borders", "visibility", euVisibility);
       }
+      // Advanced process market share 2024 (scene 13)
+      if (map.getLayer("adv-country-fills")) {
+        const advVis = currentScene === 13 ? "visible" : "none";
+        map.setLayoutProperty("adv-country-fills", "visibility", advVis);
+        map.setLayoutProperty("adv-country-borders", "visibility", advVis);
+      }
+      advancedBarMarkers.forEach((m) => {
+        m.getElement().style.display = currentScene === 13 ? "flex" : "none";
+      });
+      // Mature process market share 2024 (scene 14)
+      if (map.getLayer("mat-country-fills")) {
+        const matVis = currentScene === 14 ? "visible" : "none";
+        map.setLayoutProperty("mat-country-fills", "visibility", matVis);
+        map.setLayoutProperty("mat-country-borders", "visibility", matVis);
+      }
+      matureBarMarkers.forEach((m) => {
+        m.getElement().style.display = currentScene === 14 ? "flex" : "none";
+      });
     }
 
     ticking = false;
