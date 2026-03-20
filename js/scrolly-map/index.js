@@ -22,6 +22,22 @@ import {
   advancedProcessExtraBars,
   matureProcessCountryHighlightIds,
   matureProcessExtraBars,
+  foundryMarketShareGeoJson,
+  foundryCountryHighlightIds,
+  foundryCardData,
+  foundryLinesGeoJson,
+  equipmentGeoJson,
+  equipmentCountryHighlightIds,
+  equipmentCardData,
+  equipmentLinesGeoJson,
+  equipmentUsNlGeoJson,
+  equipmentUsNlCountryHighlightIds,
+  equipmentUsNlCardData,
+  equipmentUsNlLinesGeoJson,
+  waferGeoJson,
+  waferCountryHighlightIds,
+  waferCardData,
+  waferLinesGeoJson,
 } from "./datasets.js";
 
 // Scrollytelling (fixed) MapLibre map used by the main story sections.
@@ -35,6 +51,10 @@ let idmCardMarkers = [];
 let asiaCardMarkers = [];
 let europeCardMarkers = [];
 let fablessCardMarkers = [];
+let foundryCardMarkers = [];
+let equipmentCardMarkers = [];
+let equipmentUsNlCardMarkers = [];
+let waferCardMarkers = [];
 let barMarkers = [];
 let advancedBarMarkers = [];
 let matureBarMarkers = [];
@@ -674,6 +694,307 @@ map.on("load", () => {
     matureBarMarkers.push(marker);
   });
 
+  // Foundry company market share (scene 15)
+  map.addSource("foundry-market-share", { type: "geojson", data: foundryMarketShareGeoJson });
+  fetch("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json")
+    .then((r) => r.json())
+    .then((world) => {
+      const countries = topojson.feature(world, world.objects.countries);
+      const foundryTargetIds = new Set(Object.keys(foundryCountryHighlightIds).map(Number));
+      const foundryHighlighted = {
+        type: "FeatureCollection",
+        features: countries.features
+          .filter((f) => foundryTargetIds.has(Number(f.id)))
+          .map((f) => {
+            const info = foundryCountryHighlightIds[Number(f.id)];
+            return { ...f, properties: { ...f.properties, highlightColor: info.color, name: info.name } };
+          }),
+      };
+
+      map.addSource("foundry-country-highlights", { type: "geojson", data: foundryHighlighted });
+      map.addLayer({
+        id: "foundry-country-fills",
+        type: "fill",
+        source: "foundry-country-highlights",
+        layout: { visibility: "none" },
+        paint: { "fill-color": ["get", "highlightColor"], "fill-opacity": 0.12 },
+      });
+      map.addLayer({
+        id: "foundry-country-borders",
+        type: "line",
+        source: "foundry-country-highlights",
+        layout: { visibility: "none" },
+        paint: { "line-color": ["get", "highlightColor"], "line-width": 2.5, "line-dasharray": [3, 2] },
+      });
+      const foundryCountryVis = currentScene === 15 ? "visible" : "none";
+      map.setLayoutProperty("foundry-country-fills", "visibility", foundryCountryVis);
+      map.setLayoutProperty("foundry-country-borders", "visibility", foundryCountryVis);
+      if (map.getLayer("foundry-market-share-dots")) {
+        map.moveLayer("foundry-market-share-dots");
+      }
+    })
+    .catch((err) => console.warn("Failed to load foundry country highlights:", err));
+
+  map.addLayer({
+    id: "foundry-market-share-dots",
+    type: "circle",
+    source: "foundry-market-share",
+    layout: { visibility: "none" },
+    paint: {
+      "circle-radius": 10,
+      "circle-color": "#94e0ea",
+      "circle-stroke-color": "#1a3a6e",
+      "circle-stroke-width": 2,
+    },
+  });
+  map.addSource("foundry-lines", { type: "geojson", data: foundryLinesGeoJson });
+  map.addLayer({
+    id: "foundry-lines",
+    type: "line",
+    source: "foundry-lines",
+    layout: { visibility: "none" },
+    paint: { "line-color": "#1a3a6e", "line-width": 1.5, "line-dasharray": [4, 2] },
+  });
+
+  foundryCardData.forEach((item) => {
+    const el = document.createElement("div");
+    el.className = "foundry-card-marker";
+    el.style.display = "none";
+    const rankText = item.rank && item.rank !== "x" ? ` (#${item.rank})` : "";
+    el.innerHTML = `
+      <div class="foundry-card-marker-name">${item.name}${rankText}</div>
+      <div class="foundry-card-marker-share">${item.percentage} | ${item.process}</div>
+      <div class="foundry-card-marker-cap">${item.marketcap}</div>
+    `;
+    const marker = new maplibregl.Marker({ element: el, anchor: "center" }).setLngLat(item.coords).addTo(map);
+    foundryCardMarkers.push(marker);
+  });
+
+  // Equipment companies in China/Japan (scene 16)
+  map.addSource("equipment-companies", { type: "geojson", data: equipmentGeoJson });
+  fetch("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json")
+    .then((r) => r.json())
+    .then((world) => {
+      const countries = topojson.feature(world, world.objects.countries);
+      const equipmentTargetIds = new Set(Object.keys(equipmentCountryHighlightIds).map(Number));
+      const equipmentHighlighted = {
+        type: "FeatureCollection",
+        features: countries.features
+          .filter((f) => equipmentTargetIds.has(Number(f.id)))
+          .map((f) => {
+            const info = equipmentCountryHighlightIds[Number(f.id)];
+            return { ...f, properties: { ...f.properties, highlightColor: info.color, name: info.name } };
+          }),
+      };
+
+      map.addSource("equipment-country-highlights", { type: "geojson", data: equipmentHighlighted });
+      map.addLayer({
+        id: "equipment-country-fills",
+        type: "fill",
+        source: "equipment-country-highlights",
+        layout: { visibility: "none" },
+        paint: { "fill-color": ["get", "highlightColor"], "fill-opacity": 0.12 },
+      });
+      map.addLayer({
+        id: "equipment-country-borders",
+        type: "line",
+        source: "equipment-country-highlights",
+        layout: { visibility: "none" },
+        paint: { "line-color": ["get", "highlightColor"], "line-width": 2.5, "line-dasharray": [3, 2] },
+      });
+      const equipmentCountryVis = currentScene === 16 ? "visible" : "none";
+      map.setLayoutProperty("equipment-country-fills", "visibility", equipmentCountryVis);
+      map.setLayoutProperty("equipment-country-borders", "visibility", equipmentCountryVis);
+      if (map.getLayer("equipment-company-dots")) {
+        map.moveLayer("equipment-company-dots");
+      }
+    })
+    .catch((err) => console.warn("Failed to load equipment country highlights:", err));
+
+  map.addLayer({
+    id: "equipment-company-dots",
+    type: "circle",
+    source: "equipment-companies",
+    layout: { visibility: "none" },
+    paint: {
+      "circle-radius": 10,
+      "circle-color": "#e88ebd",
+      "circle-stroke-color": "#1a3a6e",
+      "circle-stroke-width": 2,
+    },
+  });
+  map.addSource("equipment-lines", { type: "geojson", data: equipmentLinesGeoJson });
+  map.addLayer({
+    id: "equipment-lines",
+    type: "line",
+    source: "equipment-lines",
+    layout: { visibility: "none" },
+    paint: { "line-color": "#1a3a6e", "line-width": 1.5, "line-dasharray": [4, 2] },
+  });
+
+  equipmentCardData.forEach((item) => {
+    const el = document.createElement("div");
+    el.className = "equipment-card-marker";
+    el.style.display = "none";
+    const rankText = item.rank ? ` (#${item.rank})` : "";
+    el.innerHTML = `
+      <div class="equipment-card-marker-name">${item.name}${rankText}</div>
+      <div class="equipment-card-marker-cap">${item.marketcap}</div>
+    `;
+    const marker = new maplibregl.Marker({ element: el, anchor: "center" }).setLngLat(item.coords).addTo(map);
+    equipmentCardMarkers.push(marker);
+  });
+
+  // Equipment companies in United States/Netherlands (scene 17)
+  map.addSource("equipment-usnl-companies", { type: "geojson", data: equipmentUsNlGeoJson });
+  fetch("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json")
+    .then((r) => r.json())
+    .then((world) => {
+      const countries = topojson.feature(world, world.objects.countries);
+      const equipmentUsNlTargetIds = new Set(Object.keys(equipmentUsNlCountryHighlightIds).map(Number));
+      const equipmentUsNlHighlighted = {
+        type: "FeatureCollection",
+        features: countries.features
+          .filter((f) => equipmentUsNlTargetIds.has(Number(f.id)))
+          .map((f) => {
+            const info = equipmentUsNlCountryHighlightIds[Number(f.id)];
+            return { ...f, properties: { ...f.properties, highlightColor: info.color, name: info.name } };
+          }),
+      };
+
+      map.addSource("equipment-usnl-country-highlights", { type: "geojson", data: equipmentUsNlHighlighted });
+      map.addLayer({
+        id: "equipment-usnl-country-fills",
+        type: "fill",
+        source: "equipment-usnl-country-highlights",
+        layout: { visibility: "none" },
+        paint: { "fill-color": ["get", "highlightColor"], "fill-opacity": 0.12 },
+      });
+      map.addLayer({
+        id: "equipment-usnl-country-borders",
+        type: "line",
+        source: "equipment-usnl-country-highlights",
+        layout: { visibility: "none" },
+        paint: { "line-color": ["get", "highlightColor"], "line-width": 2.5, "line-dasharray": [3, 2] },
+      });
+      const equipmentUsNlCountryVis = currentScene === 17 ? "visible" : "none";
+      map.setLayoutProperty("equipment-usnl-country-fills", "visibility", equipmentUsNlCountryVis);
+      map.setLayoutProperty("equipment-usnl-country-borders", "visibility", equipmentUsNlCountryVis);
+      if (map.getLayer("equipment-usnl-company-dots")) {
+        map.moveLayer("equipment-usnl-company-dots");
+      }
+    })
+    .catch((err) => console.warn("Failed to load equipment US/NL country highlights:", err));
+
+  map.addLayer({
+    id: "equipment-usnl-company-dots",
+    type: "circle",
+    source: "equipment-usnl-companies",
+    layout: { visibility: "none" },
+    paint: {
+      "circle-radius": 10,
+      "circle-color": "#e88ebd",
+      "circle-stroke-color": "#1a3a6e",
+      "circle-stroke-width": 2,
+    },
+  });
+  map.addSource("equipment-usnl-lines", { type: "geojson", data: equipmentUsNlLinesGeoJson });
+  map.addLayer({
+    id: "equipment-usnl-lines",
+    type: "line",
+    source: "equipment-usnl-lines",
+    layout: { visibility: "none" },
+    paint: { "line-color": "#1a3a6e", "line-width": 1.5, "line-dasharray": [4, 2] },
+  });
+
+  equipmentUsNlCardData.forEach((item) => {
+    const el = document.createElement("div");
+    el.className = "equipment-card-marker";
+    el.style.display = "none";
+    const rankText = item.rank ? ` (#${item.rank})` : "";
+    el.innerHTML = `
+      <div class="equipment-card-marker-name">${item.name}${rankText}</div>
+      <div class="equipment-card-marker-cap">${item.marketcap}</div>
+    `;
+    const marker = new maplibregl.Marker({ element: el, anchor: "center" }).setLngLat(item.coords).addTo(map);
+    equipmentUsNlCardMarkers.push(marker);
+  });
+
+  // Wafer companies (scene 18)
+  map.addSource("wafer-companies", { type: "geojson", data: waferGeoJson });
+  fetch("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json")
+    .then((r) => r.json())
+    .then((world) => {
+      const countries = topojson.feature(world, world.objects.countries);
+      const waferTargetIds = new Set(Object.keys(waferCountryHighlightIds).map(Number));
+      const waferHighlighted = {
+        type: "FeatureCollection",
+        features: countries.features
+          .filter((f) => waferTargetIds.has(Number(f.id)))
+          .map((f) => {
+            const info = waferCountryHighlightIds[Number(f.id)];
+            return { ...f, properties: { ...f.properties, highlightColor: info.color, name: info.name } };
+          }),
+      };
+
+      map.addSource("wafer-country-highlights", { type: "geojson", data: waferHighlighted });
+      map.addLayer({
+        id: "wafer-country-fills",
+        type: "fill",
+        source: "wafer-country-highlights",
+        layout: { visibility: "none" },
+        paint: { "fill-color": ["get", "highlightColor"], "fill-opacity": 0.12 },
+      });
+      map.addLayer({
+        id: "wafer-country-borders",
+        type: "line",
+        source: "wafer-country-highlights",
+        layout: { visibility: "none" },
+        paint: { "line-color": ["get", "highlightColor"], "line-width": 2.5, "line-dasharray": [3, 2] },
+      });
+      const waferCountryVis = currentScene === 18 ? "visible" : "none";
+      map.setLayoutProperty("wafer-country-fills", "visibility", waferCountryVis);
+      map.setLayoutProperty("wafer-country-borders", "visibility", waferCountryVis);
+      if (map.getLayer("wafer-company-dots")) {
+        map.moveLayer("wafer-company-dots");
+      }
+    })
+    .catch((err) => console.warn("Failed to load wafer country highlights:", err));
+
+  map.addLayer({
+    id: "wafer-company-dots",
+    type: "circle",
+    source: "wafer-companies",
+    layout: { visibility: "none" },
+    paint: {
+      "circle-radius": 10,
+      "circle-color": "#ccffa9",
+      "circle-stroke-color": "#1a3a6e",
+      "circle-stroke-width": 2,
+    },
+  });
+  map.addSource("wafer-lines", { type: "geojson", data: waferLinesGeoJson });
+  map.addLayer({
+    id: "wafer-lines",
+    type: "line",
+    source: "wafer-lines",
+    layout: { visibility: "none" },
+    paint: { "line-color": "#1a3a6e", "line-width": 1.5, "line-dasharray": [4, 2] },
+  });
+
+  waferCardData.forEach((item) => {
+    const el = document.createElement("div");
+    el.className = "wafer-card-marker";
+    el.style.display = "none";
+    const rankText = item.rank ? ` (#${item.rank})` : "";
+    el.innerHTML = `
+      <div class="wafer-card-marker-name">${item.name}${rankText}</div>
+      <div class="wafer-card-marker-cap">${item.marketcap}</div>
+    `;
+    const marker = new maplibregl.Marker({ element: el, anchor: "center" }).setLngLat(item.coords).addTo(map);
+    waferCardMarkers.push(marker);
+  });
+
   applyScene(0, { instant: true });
   setupScrollObserver();
 });
@@ -797,6 +1118,70 @@ function setupScrollObserver() {
       }
       matureBarMarkers.forEach((m) => {
         m.getElement().style.display = currentScene === 14 ? "flex" : "none";
+      });
+      // Foundry company market share (scene 15)
+      if (map.getLayer("foundry-market-share-dots")) {
+        const foundryVis = currentScene === 15 ? "visible" : "none";
+        map.setLayoutProperty("foundry-market-share-dots", "visibility", foundryVis);
+        if (map.getLayer("foundry-lines")) {
+          map.setLayoutProperty("foundry-lines", "visibility", foundryVis);
+        }
+      }
+      if (map.getLayer("foundry-country-fills")) {
+        const foundryCountryVis = currentScene === 15 ? "visible" : "none";
+        map.setLayoutProperty("foundry-country-fills", "visibility", foundryCountryVis);
+        map.setLayoutProperty("foundry-country-borders", "visibility", foundryCountryVis);
+      }
+      foundryCardMarkers.forEach((m) => {
+        m.getElement().style.display = currentScene === 15 ? "block" : "none";
+      });
+      // Equipment companies in China/Japan (scene 16)
+      if (map.getLayer("equipment-company-dots")) {
+        const equipmentVis = currentScene === 16 ? "visible" : "none";
+        map.setLayoutProperty("equipment-company-dots", "visibility", equipmentVis);
+        if (map.getLayer("equipment-lines")) {
+          map.setLayoutProperty("equipment-lines", "visibility", equipmentVis);
+        }
+      }
+      if (map.getLayer("equipment-country-fills")) {
+        const equipmentCountryVis = currentScene === 16 ? "visible" : "none";
+        map.setLayoutProperty("equipment-country-fills", "visibility", equipmentCountryVis);
+        map.setLayoutProperty("equipment-country-borders", "visibility", equipmentCountryVis);
+      }
+      equipmentCardMarkers.forEach((m) => {
+        m.getElement().style.display = currentScene === 16 ? "block" : "none";
+      });
+      // Equipment companies in United States/Netherlands (scene 17)
+      if (map.getLayer("equipment-usnl-company-dots")) {
+        const equipmentUsNlVis = currentScene === 17 ? "visible" : "none";
+        map.setLayoutProperty("equipment-usnl-company-dots", "visibility", equipmentUsNlVis);
+        if (map.getLayer("equipment-usnl-lines")) {
+          map.setLayoutProperty("equipment-usnl-lines", "visibility", equipmentUsNlVis);
+        }
+      }
+      if (map.getLayer("equipment-usnl-country-fills")) {
+        const equipmentUsNlCountryVis = currentScene === 17 ? "visible" : "none";
+        map.setLayoutProperty("equipment-usnl-country-fills", "visibility", equipmentUsNlCountryVis);
+        map.setLayoutProperty("equipment-usnl-country-borders", "visibility", equipmentUsNlCountryVis);
+      }
+      equipmentUsNlCardMarkers.forEach((m) => {
+        m.getElement().style.display = currentScene === 17 ? "block" : "none";
+      });
+      // Wafer companies (scene 18)
+      if (map.getLayer("wafer-company-dots")) {
+        const waferVis = currentScene === 18 ? "visible" : "none";
+        map.setLayoutProperty("wafer-company-dots", "visibility", waferVis);
+        if (map.getLayer("wafer-lines")) {
+          map.setLayoutProperty("wafer-lines", "visibility", waferVis);
+        }
+      }
+      if (map.getLayer("wafer-country-fills")) {
+        const waferCountryVis = currentScene === 18 ? "visible" : "none";
+        map.setLayoutProperty("wafer-country-fills", "visibility", waferCountryVis);
+        map.setLayoutProperty("wafer-country-borders", "visibility", waferCountryVis);
+      }
+      waferCardMarkers.forEach((m) => {
+        m.getElement().style.display = currentScene === 18 ? "block" : "none";
       });
     }
 

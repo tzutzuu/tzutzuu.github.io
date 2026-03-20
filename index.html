@@ -24,6 +24,17 @@
   </style>
 </head>
 <body class="m-0 bg-[#f7f7f9] text-[#20222a] leading-relaxed relative">
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Primary navigation">
+      <button class="site-nav-toggle" type="button" aria-expanded="false" aria-label="Show navigation">
+        <span class="site-nav-toggle-icon" aria-hidden="true"></span>
+      </button>
+      <div class="site-nav-links">
+        <a href="./index.html" class="site-nav-link" aria-current="page">Landscape overview</a>
+        <a href="./article.html" class="site-nav-link">Policy analysis</a>
+      </div>
+    </nav>
+  </header>
 
   <div id="map" class="fixed inset-0 w-full h-screen z-[1]" aria-hidden="true"></div>
   <!--
@@ -32,7 +43,7 @@
     - z-[2] ensures text/cards stay above the map
   -->
 
-  <div class="relative z-[2]">
+  <div class="relative z-[2] site-content">
     <!--
       Main scrollytelling column.
       - flex flex-col stacks sections vertically
@@ -414,9 +425,133 @@
         </div>
       </section>
 
+      <!-- SCENE 15 (Foundry companies market share on world map) -->
+      <section class="map-step relative min-h-[100vh] flex items-start justify-start p-4 sm:p-6 md:p-8" data-scene="15">
+        <div class="pointer-events-none absolute left-4 bottom-4 sm:left-8 sm:bottom-6 flex flex-col gap-3 items-start">
+          <div class="flex flex-row gap-2">
+            <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#94e0ea] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#1a3a6e]">
+              <span class="text-base sm:text-lg font-semibold tracking-wide text-[#1a3a6e]">
+                Foundry
+              </span>
+            </div>
+          </div>
+          <p class="pointer-events-auto text-[10px] sm:text-xs text-[#6b7280]">
+            Source: <a href="https://companiesmarketcap.com/semiconductors/largest-semiconductor-companies-by-market-cap/" target="_blank" rel="noopener noreferrer" class="underline decoration-dotted hover:text-blue-600">companiesmarketcap.com</a>
+          </p>
+          <div class="pointer-events-auto flex flex-wrap gap-2 text-[11px] sm:text-[12px] text-[#6b7280]">
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #16a34a;"></div>
+              <span>Taiwan</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #2563eb;"></div>
+              <span>South Korea</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #dc2626;"></div>
+              <span>China</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #1a3a6e;"></div>
+              <span>United States</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCENE 16 (Equipment companies in China and Japan) -->
+      <section class="map-step relative min-h-[100vh] flex items-start justify-start p-4 sm:p-6 md:p-8" data-scene="16">
+        <div class="pointer-events-none absolute left-4 bottom-4 sm:left-8 sm:bottom-6 flex flex-col gap-3 items-start">
+          <div class="flex flex-row gap-2">
+            <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#e88ebd] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#1a3a6e]">
+              <span class="text-base sm:text-lg font-semibold tracking-wide text-[#1a3a6e]">
+                Equipment
+              </span>
+            </div>
+          </div>
+          <p class="pointer-events-auto text-[10px] sm:text-xs text-[#6b7280]">
+            Source: <a href="https://companiesmarketcap.com/semiconductors/largest-semiconductor-companies-by-market-cap/" target="_blank" rel="noopener noreferrer" class="underline decoration-dotted hover:text-blue-600">companiesmarketcap.com</a>
+          </p>
+          <div class="pointer-events-auto flex flex-wrap gap-2 text-[11px] sm:text-[12px] text-[#6b7280]">
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #dc2626;"></div>
+              <span>China</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #ea580c;"></div>
+              <span>Japan</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCENE 17 (Equipment companies in United States and Netherlands) -->
+      <section class="map-step relative min-h-[100vh] flex items-start justify-start p-4 sm:p-6 md:p-8" data-scene="17">
+        <div class="pointer-events-none absolute left-4 bottom-4 sm:left-8 sm:bottom-6 flex flex-col gap-3 items-start">
+          <div class="flex flex-row gap-2">
+            <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#e88ebd] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#1a3a6e]">
+              <span class="text-base sm:text-lg font-semibold tracking-wide text-[#1a3a6e]">
+                Equipment
+              </span>
+            </div>
+          </div>
+          <p class="pointer-events-auto text-[10px] sm:text-xs text-[#6b7280]">
+            Source: <a href="https://companiesmarketcap.com/semiconductors/largest-semiconductor-companies-by-market-cap/" target="_blank" rel="noopener noreferrer" class="underline decoration-dotted hover:text-blue-600">companiesmarketcap.com</a>
+          </p>
+          <div class="pointer-events-auto flex flex-wrap gap-2 text-[11px] sm:text-[12px] text-[#6b7280]">
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #1a3a6e;"></div>
+              <span>United States</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #53cbff;"></div>
+              <span>Netherlands</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCENE 18 (Wafer companies) -->
+      <section class="map-step relative min-h-[100vh] flex items-start justify-start p-4 sm:p-6 md:p-8" data-scene="18">
+        <div class="pointer-events-none absolute left-4 bottom-4 sm:left-8 sm:bottom-6 flex flex-col gap-3 items-start">
+          <div class="flex flex-row gap-2">
+            <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#ccffa9] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#1a3a6e]">
+              <span class="text-base sm:text-lg font-semibold tracking-wide text-[#1a3a6e]">
+                Wafer
+              </span>
+            </div>
+          </div>
+          <p class="pointer-events-auto text-[10px] sm:text-xs text-[#6b7280]">
+            Source: <a href="https://companiesmarketcap.com/semiconductors/largest-semiconductor-companies-by-market-cap/" target="_blank" rel="noopener noreferrer" class="underline decoration-dotted hover:text-blue-600">companiesmarketcap.com</a>
+          </p>
+          <div class="pointer-events-auto flex flex-wrap gap-2 text-[11px] sm:text-[12px] text-[#6b7280]">
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #ea580c;"></div>
+              <span>Japan</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #16a34a;"></div>
+              <span>Taiwan</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #00a7b0;"></div>
+              <span>Germany</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #3b82f6;"></div>
+              <span>France</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #2563eb;"></div>
+              <span>South Korea</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- FINAL SECTION: Independent interactive map (full-section) -->
       <!-- Keep .map-step so scroll-snap doesn't "jump" back -->
-      <section class="map-step relative min-h-[100vh] h-[100vh] p-0" data-scene="15">
+      <section class="map-step relative min-h-[100vh] h-[100vh] p-0" data-scene="19">
         <div
           id="interactive-map"
           class="absolute inset-0 w-full h-full bg-white"
@@ -483,6 +618,7 @@
 
   <!-- MapLibre GL JS: provides the map engine -->
   <script src="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.js"></script>
+  <script type="module" src="./js/header-toggle.js"></script>
 
   <!-- Module entrypoints -->
   <!-- - `js/scrolly-map/index.js`: background scrollytelling map + scenes -->

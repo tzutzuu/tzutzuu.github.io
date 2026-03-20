@@ -119,5 +119,37 @@ export const scenes = [
     pitch: 0,
     bearing: 0,
   },
+  {
+    title: "",
+    description: "",
+    center: [20, 28],
+    zoom: 1.8,
+    pitch: 0,
+    bearing: 0,
+  },
+  {
+    title: "",
+    description: "",
+    center: [126, 36],
+    zoom: 3.3,
+    pitch: 0,
+    bearing: 0,
+  },
+  {
+    title: "",
+    description: "",
+    center: [-55, 45],
+    zoom: 2.5,
+    pitch: 0,
+    bearing: 0,
+  },
+  {
+    title: "",
+    description: "",
+    center: [75, 42],
+    zoom: 2.5,
+    pitch: 0,
+    bearing: 0,
+  },
 ];
 

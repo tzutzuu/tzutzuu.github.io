@@ -237,3 +237,451 @@ export const matureProcessExtraBars = [
   { name: "Rest of World", value: 8, color: "#9ca3af", coords: [60, -8] },
 ];
 
+// Foundry market share by company (scene 15)
+export const foundryMarketShareGeoJson = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      properties: {
+        rank: "2",
+        name: "TSMC",
+        marketcap: "$1.689 T",
+        percentage: "70.2%",
+        process: "Advanced",
+        type: "Foundry",
+      },
+      geometry: { type: "Point", coordinates: [121.0046856, 24.7820648] },
+    },
+    {
+      type: "Feature",
+      properties: {
+        rank: "39",
+        name: "United Microelectronics",
+        marketcap: "$24.91 B",
+        percentage: "4.4%",
+        process: "Mature",
+        type: "Foundry",
+      },
+      geometry: { type: "Point", coordinates: [121.0062859, 24.7823005] },
+    },
+    {
+      type: "Feature",
+      properties: {
+        rank: "4",
+        name: "Samsung",
+        marketcap: "$773.95 B",
+        percentage: "7.3%",
+        process: "Advanced",
+        type: "Foundry",
+      },
+      geometry: { type: "Point", coordinates: [127.0511335, 37.2558477] },
+    },
+    {
+      type: "Feature",
+      properties: {
+        rank: "20",
+        name: "SMIC",
+        marketcap: "$85.6 B",
+        percentage: "5.1%",
+        process: "Advanced",
+        type: "Foundry",
+      },
+      geometry: { type: "Point", coordinates: [121.60866, 31.2181] },
+    },
+    {
+      type: "Feature",
+      properties: {
+        rank: "x",
+        name: "Huahong Group",
+        marketcap: "$23.95 B",
+        percentage: "2.5%",
+        process: "Mature",
+        type: "Foundry",
+      },
+      geometry: { type: "Point", coordinates: [121.58521, 31.20748] },
+    },
+    {
+      type: "Feature",
+      properties: {
+        rank: "41",
+        name: "Global Foundries",
+        marketcap: "$22.84 B",
+        percentage: "3.9%",
+        process: "Mature",
+        type: "Foundry",
+      },
+      geometry: { type: "Point", coordinates: [-73.7590016, 42.9705801] },
+    },
+  ],
+};
+
+export const foundryCountryHighlightIds = {
+  158: { name: "Taiwan", color: "#16a34a" },
+  410: { name: "South Korea", color: "#2563eb" },
+  156: { name: "China", color: "#dc2626" },
+  840: { name: "United States", color: "#1a3a6e" },
+};
+
+export const foundryCardData = [
+  {
+    name: "TSMC",
+    rank: "2",
+    marketcap: "$1.689 T",
+    percentage: "70.2%",
+    process: "Advanced",
+    coords: [100.0, 5.0],
+  },
+  {
+    name: "United Microelectronics",
+    rank: "39",
+    marketcap: "$24.91 B",
+    percentage: "4.4%",
+    process: "Mature",
+    coords: [140.0, 10.0],
+  },
+  {
+    name: "Samsung",
+    rank: "4",
+    marketcap: "$773.95 B",
+    percentage: "7.3%",
+    process: "Advanced",
+    coords: [148.0, 52.0],
+  },
+  {
+    name: "SMIC",
+    rank: "20",
+    marketcap: "$85.6 B",
+    percentage: "5.1%",
+    process: "Advanced",
+    coords: [100.0, 50.0],
+  },
+  {
+    name: "Huahong Group",
+    rank: "",
+    marketcap: "$23.95 B",
+    percentage: "2.5%",
+    process: "Mature",
+    coords: [80.0, 30.0],
+  },
+  {
+    name: "Global Foundries",
+    rank: "41",
+    marketcap: "$22.84 B",
+    percentage: "3.9%",
+    process: "Mature",
+    coords: [-52.0, 47.0],
+  },
+];
+
+export const foundryLinesGeoJson = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      properties: { name: "TSMC" },
+      geometry: {
+        type: "LineString",
+        coordinates: [
+          [121.0046856, 24.7820648],
+          [100.0, 5.0],
+        ],
+      },
+    },
+    {
+      type: "Feature",
+      properties: { name: "United Microelectronics" },
+      geometry: {
+        type: "LineString",
+        coordinates: [
+          [121.0062859, 24.7823005],
+          [140.0, 10.0],
+        ],
+      },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Samsung" },
+      geometry: {
+        type: "LineString",
+        coordinates: [
+          [127.0511335, 37.2558477],
+          [148.0, 52.0],
+        ],
+      },
+    },
+    {
+      type: "Feature",
+      properties: { name: "SMIC" },
+      geometry: {
+        type: "LineString",
+        coordinates: [
+          [121.60866, 31.2181],
+          [100.0, 50.0],
+        ],
+      },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Huahong Group" },
+      geometry: {
+        type: "LineString",
+        coordinates: [
+          [121.58521, 31.20748],
+          [80.0, 30.0],
+        ],
+      },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Global Foundries" },
+      geometry: {
+        type: "LineString",
+        coordinates: [
+          [-73.7590016, 42.9705801],
+          [-52.0, 47.0],
+        ],
+      },
+    },
+  ],
+};
+
+export const equipmentGeoJson = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      properties: { name: "Tokyo Electron", rank: "16", marketcap: "$119.00B", type: "Equipment" },
+      geometry: { type: "Point", coordinates: [139.7364288, 35.6732106] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Disco Corp.", rank: "28", marketcap: "$47.126B", type: "Equipment" },
+      geometry: { type: "Point", coordinates: [139.7339948, 35.5868586] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "SCREEN Holdings", rank: "51", marketcap: "$12.642B", type: "Equipment" },
+      geometry: { type: "Point", coordinates: [135.7516371, 35.0338801] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "NAURA Technology Group", rank: "27", marketcap: "$49.119B", type: "Equipment" },
+      geometry: { type: "Point", coordinates: [116.407395, 39.904211] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "AMEC", rank: "33", marketcap: "$31.502B", type: "Equipment" },
+      geometry: { type: "Point", coordinates: [121.67931, 31.22885] },
+    },
+  ],
+};
+
+export const equipmentCountryHighlightIds = {
+  156: { name: "China", color: "#dc2626" },
+  392: { name: "Japan", color: "#ea580c" },
+};
+
+export const equipmentCardData = [
+  { name: "Tokyo Electron", rank: "16", marketcap: "$119.00B", coords: [147.0, 42.5] },
+  { name: "Disco Corp.", rank: "28", marketcap: "$47.126B", coords: [147.0, 35.0] },
+  { name: "SCREEN Holdings", rank: "51", marketcap: "$12.642B", coords: [129.5, 39.0] },
+  { name: "NAURA Technology Group", rank: "27", marketcap: "$49.119B", coords: [108.0, 47.5] },
+  { name: "AMEC", rank: "33", marketcap: "$31.502B", coords: [127.8, 24.5] },
+];
+
+export const equipmentLinesGeoJson = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      properties: { name: "Tokyo Electron" },
+      geometry: { type: "LineString", coordinates: [[139.7364288, 35.6732106], [147.0, 42.5]] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Disco Corp." },
+      geometry: { type: "LineString", coordinates: [[139.7339948, 35.5868586], [147.0, 35.0]] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "SCREEN Holdings" },
+      geometry: { type: "LineString", coordinates: [[135.7516371, 35.0338801], [129.5, 39.0]] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "NAURA Technology Group" },
+      geometry: { type: "LineString", coordinates: [[116.407395, 39.904211], [108.0, 47.5]] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "AMEC" },
+      geometry: { type: "LineString", coordinates: [[121.67931, 31.22885], [127.8, 24.5]] },
+    },
+  ],
+};
+
+export const equipmentUsNlGeoJson = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      properties: { name: "Lam Research", rank: "9", marketcap: "$263.49B", type: "Equipment" },
+      geometry: { type: "Point", coordinates: [-121.9570265, 37.4885263] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Applied Materials", rank: "11", marketcap: "$236.212B", type: "Equipment" },
+      geometry: { type: "Point", coordinates: [-121.9792715, 37.3777843] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "KLA", rank: "13", marketcap: "$171.759B", type: "Equipment" },
+      geometry: { type: "Point", coordinates: [-121.9255574, 37.4210942] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "ASML", rank: "5", marketcap: "$519.780B", type: "Equipment" },
+      geometry: { type: "Point", coordinates: [5.412781, 51.404027] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "ASM International", rank: "31", marketcap: "$38.572B", type: "Equipment" },
+      geometry: { type: "Point", coordinates: [5.1894332, 52.3492057] },
+    },
+  ],
+};
+
+export const equipmentUsNlCountryHighlightIds = {
+  840: { name: "United States", color: "#1a3a6e" },
+  528: { name: "Netherlands", color: "#53cbff" },
+};
+
+export const equipmentUsNlCardData = [
+  { name: "Lam Research", rank: "9", marketcap: "$263.49B", coords: [-130.0, 42.8] },
+  { name: "Applied Materials", rank: "11", marketcap: "$236.212B", coords: [-110.0, 32.5] },
+  { name: "KLA", rank: "13", marketcap: "$171.759B", coords: [-136.0, 31.8] },
+  { name: "ASML", rank: "5", marketcap: "$519.780B", coords: [16.2, 44.8] },
+  { name: "ASM International", rank: "31", marketcap: "$38.572B", coords: [16.2, 58.2] },
+];
+
+export const equipmentUsNlLinesGeoJson = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      properties: { name: "Lam Research" },
+      geometry: { type: "LineString", coordinates: [[-121.9570265, 37.4885263], [-130.0, 42.8]] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Applied Materials" },
+      geometry: { type: "LineString", coordinates: [[-121.9792715, 37.3777843], [-110.0, 32.5]] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "KLA" },
+      geometry: { type: "LineString", coordinates: [[-121.9255574, 37.4210942], [-136.0, 31.8]] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "ASML" },
+      geometry: { type: "LineString", coordinates: [[5.412781, 51.404027], [16.2, 44.8]] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "ASM International" },
+      geometry: { type: "LineString", coordinates: [[5.1894332, 52.3492057], [16.2, 58.2]] },
+    },
+  ],
+};
+
+export const waferGeoJson = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      properties: { name: "Shin-Etsu", rank: "", marketcap: "$61.94B", type: "Wafer" },
+      geometry: { type: "Point", coordinates: [139.7650482, 35.6842777] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "GlobalWafers", rank: "73", marketcap: "$7.25B", type: "Wafer" },
+      geometry: { type: "Point", coordinates: [121.0062859, 24.7823005] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Sumco Corporation", rank: "91", marketcap: "$3.61B", type: "Wafer" },
+      geometry: { type: "Point", coordinates: [139.7569483, 35.6499636] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Siltronic", rank: "114", marketcap: "$1.71B", type: "Wafer" },
+      geometry: { type: "Point", coordinates: [11.6226634, 48.1375703] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Soitec", rank: "120", marketcap: "$1.27B", type: "Wafer" },
+      geometry: { type: "Point", coordinates: [5.877707, 45.264005] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "SK Siltron", rank: "", marketcap: "$1.4B", type: "Wafer" },
+      geometry: { type: "Point", coordinates: [128.3509342, 36.1172459] },
+    },
+  ],
+};
+
+export const waferCountryHighlightIds = {
+  392: { name: "Japan", color: "#ea580c" },
+  158: { name: "Taiwan", color: "#16a34a" },
+  276: { name: "Germany", color: "#00a7b0" },
+  250: { name: "France", color: "#3b82f6" },
+  410: { name: "South Korea", color: "#2563eb" },
+};
+
+export const waferCardData = [
+  { name: "Shin-Etsu", rank: "", marketcap: "$61.94B", coords: [151.0, 41.0] },
+  { name: "GlobalWafers", rank: "73", marketcap: "$7.25B", coords: [131.5, 20.5] },
+  { name: "Sumco Corporation", rank: "91", marketcap: "$3.61B", coords: [151.0, 33.0] },
+  { name: "Siltronic", rank: "114", marketcap: "$1.71B", coords: [20.0, 52.0] },
+  { name: "Soitec", rank: "120", marketcap: "$1.27B", coords: [-1.0, 41.0] },
+  { name: "SK Siltron", rank: "", marketcap: "$1.4B", coords: [139.5, 45.5] },
+];
+
+export const waferLinesGeoJson = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      properties: { name: "Shin-Etsu" },
+      geometry: { type: "LineString", coordinates: [[139.7650482, 35.6842777], [151.0, 41.0]] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "GlobalWafers" },
+      geometry: { type: "LineString", coordinates: [[121.0062859, 24.7823005], [131.5, 20.5]] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Sumco Corporation" },
+      geometry: { type: "LineString", coordinates: [[139.7569483, 35.6499636], [151.0, 33.0]] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Siltronic" },
+      geometry: { type: "LineString", coordinates: [[11.6226634, 48.1375703], [20.0, 52.0]] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Soitec" },
+      geometry: { type: "LineString", coordinates: [[5.877707, 45.264005], [-1.0, 41.0]] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "SK Siltron" },
+      geometry: { type: "LineString", coordinates: [[128.3509342, 36.1172459], [139.5, 45.5]] },
+    },
+  ],
+};
+

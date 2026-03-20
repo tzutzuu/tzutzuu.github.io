@@ -47,7 +47,7 @@ automotive, industrial, power, and IoT (internet of things) applications",STM,29
 43,Credo Technology,Fabless (Design),$17.51,37.4032743,-121.9471512,United States,"110 Rio Robles, San Jose, California 95134, United States",FALSE,,CRDO,96.95
 44,Lasertec,IDM (Design),$17.13,35.5068803,139.6110182,Japan,"2-10-1 Shin-yokohama, Kohoku-ku, Yokohama 222-8552 Japan",FALSE,Fab-lite,6920.T,190.107
 45,Entegris,Other,$17.04,42.5489629,-71.2837088,United States,"129 Concord Road, Billerica, MA 01821, USA",FALSE,Supplier for wafer companies,ENTG,112.41
-46,VeriSilicon Microelectronics,Fabless (Design),$16.70,37.41961,-121.9739968,China,"2150 Gold Street, Suite 200 PO Box 1090, San Jose, CA",FALSE,,688521.SS,31.7533
+46,VeriSilicon Microelectronics,Fabless (Design),$16.70,31.20489,121.58414,China,"2150 Gold Street, Suite 200 PO Box 1090, San Jose, CA",FALSE,,688521.SS,31.7533
 47,MACOM,IDM (Design),$16.13,42.6357772,-71.3160026,United States,"100 Chelmsford Street Lowell, MA, 01851 United States",FALSE,mature processes,MTSI,215.03
 48,BE Semiconductor,Other,$14.65,51.9609203,6.019889,Netherlands,Ratio 6 6921 RW Duiven The Netherlands,FALSE,ATP equipment,BESI.AS,185.922
 49,Tower Semiconductor,Pureplay Foundry (Manufacturing),$13.64,32.688821,35.2498611,Israel,"Ramat Gavriel Industrial Park 20 Shaul Amor Avenue P.O. Box 619 Migdal Haemek, 2310502 Israel",FALSE,,TSEM,121.28
@@ -56,7 +56,7 @@ automotive, industrial, power, and IoT (internet of things) applications",STM,29
 58,Amkor Technology,OSAT (ATP),$10.84,33.3355266,-111.8990921,United States,"2045 East Innovation Circle, Tempe, Arizona, 85284",TRUE,,AMKR,43.87
 73,GlobalWafers,Wafer (Manufacturing),$7.25,24.7823005,121.0062859,Taiwan,"No. 8, Gongye East 2nd Rd., Hsinchu Science Park, Hsinchu City, Hsinchu City, 300091 Taiwan",TRUE,,6488.TWO,15.1592
 91,Sumco Corporation,Wafer (Manufacturing),$3.61,35.6499636,139.7569483,Japan,"1-2-1 Shibaura, Minato-ku, Tokyo 105-8634",TRUE,,3436.T,10.333
-109,Photronics,Equipment (Manufacturing),$2.00,,,United States,,FALSE,,PLAB,33.93
+109,Photronics,Equipment (Manufacturing),$2.00,41.4261639,-73.3771325,United States,,FALSE,,PLAB,33.93
 114,Siltronic,Wafer (Manufacturing),$1.71,48.1375703,11.6226634,Germany,"Einsteinstraße 172 81677 München, Germany",TRUE,,WAF.F,56.9271
 120,Soitec,Wafer (Manufacturing),$1.27,45.264005,5.877707,France,"Parc Technologique des Fontaines. 38190, Bernin",TRUE,,SOI.PA,35.662
 123,SÜSS MicroTec,Equipment (Manufacturing),$1.05,48.25045,11.6237853,Germany,Schleißheimer Str. 90. D 85748 Garching,TRUE,,SMHN.DE,54.7321
