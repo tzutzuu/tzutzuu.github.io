@@ -32,6 +32,8 @@
       <div class="site-nav-links">
         <a href="./index.html" class="site-nav-link" aria-current="page">Landscape overview</a>
         <a href="./article.html" class="site-nav-link">Policy analysis</a>
+        <a href="./toward-new-equilibrium.html" class="site-nav-link">Toward a New Equilibrium</a>
+        <a href="./top-50-companies.html" class="site-nav-link">Top 50 companies</a>
       </div>
     </nav>
   </header>
@@ -597,7 +599,7 @@
 
       <!-- SCENE 20 (ATP inputs + infographic) -->
       <section class="map-step relative min-h-[100vh] flex items-center justify-center p-4 sm:p-6 md:p-8" data-scene="20">
-        <div class="design-stage-row">
+        <div class="design-stage-row design-stage-row--scene20">
           <div class="design-stage-card">
             <h3 style="color: #ffd700; font-size: 1.3rem; font-weight: 700; margin: 0 0 0.8rem; line-height: 1.3;">ATP Inputs &amp; Equipment</h3>
             <p class="design-stage-text">
@@ -605,7 +607,7 @@
             </p>
           </div>
           <div class="design-stage-img-wrapper">
-            <img src="./assets/ATP_infographic_2.png" alt="ATP inputs and equipment infographic" class="design-stage-img" />
+            <img src="./assets/ATP_infographic_2.png" alt="ATP inputs and equipment infographic" class="design-stage-img design-stage-img--scene20" />
           </div>
         </div>
       </section>
@@ -782,67 +784,6 @@
         </div>
       </section>
 
-      <!-- FINAL SECTION: Independent interactive map (full-section) -->
-      <!-- Keep .map-step so scroll-snap doesn't "jump" back -->
-      <section class="map-step relative min-h-[100vh] h-[100vh] p-0" data-scene="26">
-        <div
-          id="interactive-map"
-          class="absolute inset-0 w-full h-full bg-white"
-          style="touch-action: pan-y; overscroll-behavior: contain;"
-          aria-label="Interactive world map"
-        ></div>
-
-        <div class="pointer-events-none absolute right-0 bottom-0 p-4 sm:p-6 md:p-8 flex justify-end">
-          <div id="interactive-map-info" class="relative">
-            <!-- Expanded card -->
-            <div
-              id="interactive-map-info-expanded"
-              class="pointer-events-auto revenue-card"
-              style="position: relative; right: auto; bottom: auto; margin-left: 0; max-width: 720px;"
-            >
-              <!-- Collapse chevron (top-right) -->
-              <button
-                id="interactive-map-info-collapse"
-                type="button"
-                aria-label="Collapse info"
-                class="absolute top-3 right-3 inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/10 border border-[rgba(255,215,0,0.35)] hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-[#ffd700]"
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M6 9l6 6 6-6" stroke="#ffd700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
-
-              <h3 class="revenue-card-title pr-12">Overview of the World’s Top 50+ Semiconductor Companies</h3>
-              <div class="revenue-card-source">
-                <p class="revenue-card-link">
-                  Source:
-                  <a
-                    href="https://companiesmarketcap.com/semiconductors/largest-semiconductor-companies-by-market-cap/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="underline decoration-dotted hover:text-blue-200"
-                  >companiesmarketcap.com</a>
-                </p>
-              </div>
-            </div>
-
-            <!-- Collapsed icon button -->
-            <button
-              id="interactive-map-info-collapsed"
-              type="button"
-              aria-label="Show info"
-              class="pointer-events-auto hidden w-12 h-12 rounded-full bg-[#1a3a6e] border-[3px] border-[#ffd700] shadow-[0_18px_45px_rgba(0,0,0,0.24)] inline-flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-[#ffd700]"
-            >
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <circle cx="12" cy="12" r="9" stroke="#ffd700" stroke-width="2"/>
-                <path d="M12 10.5v6" stroke="#ffd700" stroke-width="2" stroke-linecap="round"/>
-                <path d="M12 7.5h.01" stroke="#ffd700" stroke-width="3" stroke-linecap="round"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </section>
-
     </main>
   </div>
 
@@ -853,10 +794,7 @@
   <script src="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.js"></script>
   <script type="module" src="./js/header-toggle.js"></script>
 
-  <!-- Module entrypoints -->
-  <!-- - `js/scrolly-map/index.js`: background scrollytelling map + scenes -->
-  <!-- - `js/interactive-map/index.js`: final-section interactive map + CSV points -->
+  <!-- Module entrypoint: background scrollytelling map + scenes (interactive explorer: top-50-companies.html) -->
   <script type="module" src="./js/scrolly-map/index.js"></script>
-  <script type="module" src="./js/interactive-map/index.js"></script>
 </body>
 </html>

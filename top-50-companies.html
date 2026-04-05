@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top 50 companies — Semiconductor map</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body
+  class="m-0 h-full min-h-0 overflow-hidden text-[#20222a] leading-relaxed relative"
+  data-interactive-map-page="true"
+>
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Primary navigation">
+      <button class="site-nav-toggle" type="button" aria-expanded="false" aria-label="Show navigation">
+        <span class="site-nav-toggle-icon" aria-hidden="true"></span>
+      </button>
+      <div class="site-nav-links">
+        <a href="./index.html" class="site-nav-link">Landscape overview</a>
+        <a href="./article.html" class="site-nav-link">Policy analysis</a>
+        <a href="./toward-new-equilibrium.html" class="site-nav-link">Toward a New Equilibrium</a>
+        <a href="./top-50-companies.html" class="site-nav-link" aria-current="page">Top 50 companies</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="top50-map-stage" aria-label="Top semiconductor companies map">
+    <div
+      id="interactive-map"
+      class="absolute inset-0 w-full h-full bg-white"
+      aria-label="Interactive world map"
+    ></div>
+
+    <div class="pointer-events-none absolute right-0 bottom-0 z-[45] p-4 sm:p-6 md:p-8 flex justify-end">
+      <div id="interactive-map-info" class="relative">
+        <div
+          id="interactive-map-info-expanded"
+          class="pointer-events-auto revenue-card"
+          style="position: relative; right: auto; bottom: auto; margin-left: 0; max-width: 720px;"
+        >
+          <button
+            id="interactive-map-info-collapse"
+            type="button"
+            aria-label="Collapse info"
+            class="absolute top-3 right-3 inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/10 border border-[rgba(255,215,0,0.35)] hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-[#ffd700]"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="#ffd700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <h3 class="revenue-card-title pr-12">Overview of the World&rsquo;s Top 50+ Semiconductor Companies</h3>
+          <div class="revenue-card-source">
+            <p class="revenue-card-link">
+              Source:
+              <a
+                href="https://companiesmarketcap.com/semiconductors/largest-semiconductor-companies-by-market-cap/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="underline decoration-dotted hover:text-blue-200"
+              >companiesmarketcap.com</a>
+            </p>
+          </div>
+        </div>
+
+        <button
+          id="interactive-map-info-collapsed"
+          type="button"
+          aria-label="Show info"
+          class="pointer-events-auto hidden w-12 h-12 rounded-full bg-[#1a3a6e] border-[3px] border-[#ffd700] shadow-[0_18px_45px_rgba(0,0,0,0.24)] inline-flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-[#ffd700]"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" stroke="#ffd700" stroke-width="2"/>
+            <path d="M12 10.5v6" stroke="#ffd700" stroke-width="2" stroke-linecap="round"/>
+            <path d="M12 7.5h.01" stroke="#ffd700" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.js"></script>
+  <script type="module" src="./js/header-toggle.js"></script>
+  <script type="module" src="./js/interactive-map/index.js"></script>
+</body>
+</html>

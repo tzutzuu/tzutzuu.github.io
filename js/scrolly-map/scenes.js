@@ -207,13 +207,5 @@ export const scenes = [
     pitch: 0,
     bearing: 0,
   },
-  {
-    title: "Interactive Map",
-    description: "Explore companies",
-    center: [0, 20],
-    zoom: 1.5,
-    pitch: 0,
-    bearing: 0,
-  },
 ];
 

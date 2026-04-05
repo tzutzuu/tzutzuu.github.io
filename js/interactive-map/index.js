@@ -13,6 +13,8 @@ function initInteractiveMap() {
     return;
   }
 
+  const standalone = document.body?.dataset?.interactiveMapPage === "true";
+
   const map = new maplibregl.Map({
     container,
     style: buildInteractiveMapStyle(),
@@ -20,7 +22,9 @@ function initInteractiveMap() {
     zoom: 1.5,
     pitch: 0,
     bearing: 0,
-    cooperativeGestures: true,
+    // Full-screen explorer: wheel/trackpad zooms the map without Cmd/Ctrl (cooperativeGestures off).
+    // Embedded in the story scroll page: keep cooperative gestures so the page can scroll past the map.
+    cooperativeGestures: !standalone,
   });
 
   attachMapErrorLogger(map);
@@ -71,7 +75,12 @@ function initWhenVisible() {
 
 function boot() {
   setupInteractiveMapInfoToggle();
-  initWhenVisible();
+  const standalone = document.body?.dataset?.interactiveMapPage === "true";
+  if (standalone) {
+    initInteractiveMap();
+  } else {
+    initWhenVisible();
+  }
 }
 
 if (document.readyState === "loading") {

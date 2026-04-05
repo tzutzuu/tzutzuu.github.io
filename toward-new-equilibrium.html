@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" class="article-layout">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toward a New Equilibrium — Semiconductor map</title>
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Primary navigation">
+      <button class="site-nav-toggle" type="button" aria-expanded="false" aria-label="Show navigation">
+        <span class="site-nav-toggle-icon" aria-hidden="true"></span>
+      </button>
+      <div class="site-nav-links">
+        <a href="./index.html" class="site-nav-link">Landscape overview</a>
+        <a href="./article.html" class="site-nav-link">Policy analysis</a>
+        <a href="./toward-new-equilibrium.html" class="site-nav-link" aria-current="page">Toward a New Equilibrium</a>
+        <a href="./top-50-companies.html" class="site-nav-link">Top 50 companies</a>
+      </div>
+    </nav>
+  </header>
+
+  <div id="map" class="map-bg" aria-hidden="true"></div>
+
+  <main class="article-main content">
+    <section class="article-hero">
+      <h1 class="article-title">The Semiconductor Industry&rsquo;s Diversification and the New Equilibrium</h1>
+    </section>
+
+    <article class="article-content article-doc-content">
+      <p>Semiconductors sit at the core of modern economic and military power. They enable artificial intelligence, electric vehicles, telecommunications networks, advanced weapons systems, and critical infrastructure. The industry structure is highly globalized and interdependent. There are more than <a href="https://www.gsaglobal.org/wp-content/uploads/2020/02/GSA-Accenture-Globality-and-Complexity-of-the-Semiconductor-Ecosystem.pdf" target="_blank" rel="noopener noreferrer">70 countries</a> participating in the semiconductor trade, and <a href="https://www.gsaglobal.org/wp-content/uploads/2020/02/GSA-Accenture-Globality-and-Complexity-of-the-Semiconductor-Ecosystem.pdf" target="_blank" rel="noopener noreferrer">a single chip could cross dozens of borders before reaching end users</a>.</p>
+      <p>Paradoxically, the semiconductor supply chain is vertically fragmented, yet horizontally centralized and specialized due to the technological depth in each stage of the supply chain. The Netherlands&rsquo; ASML is the sole producer of extreme ultraviolet (EUV) lithography equipment required for the most advanced fabrications (&lt;7nm chips); the US dominates in fabless, core IP and EDA firms; Japan supplies more than 50% of the silicon wafers and 87% of the photoresists (a key component to transfer chips&rsquo; digital designs onto silicon wafers); South Korea leads in memory chips; Taiwan manufactures 90% of the most advanced chips (7nm and below), and China for a strong share in mature-node processing and 38% of the world&rsquo;s outsourced assembly Test and Pack (OSAT) capacity. These 7 countries together account for 99% of the global semiconductor industry by company headquarters, and each of them holds one or more supply chain chokepoints where they are dominant and irreplaceable. Overall, the supply chain is very interdependent in structure but concentrated in key nodes<a id="cite-1-1" class="article-cite" href="#ref-1" aria-label="Jump to reference 1">[1]</a>.</p>
+      <p>This creates structural vulnerabilities in the supply chain, as it can be easily interrupted. The COVID-19 chip shortage has evidenced these insecurities. It <a href="https://www.usitc.gov/publications/332/working_papers/the_roadblocks_of_the_covid-19_pandemic_in_the_automotive_industry_final.pdf" target="_blank" rel="noopener noreferrer">halted automobile manufacturing worldwide</a> and <a href="https://media.defense.gov/2022/Feb/24/2002944158/-1/-1/1/DOD-EO-14017-REPORT-SECURING-DEFENSE-CRITICAL-SUPPLY-CHAINS.PDF" target="_blank" rel="noopener noreferrer">constrained defense manufacturing for the US military jets</a>. Simultaneously, the escalating U.S.-China tech rivalry has provided a new perspective to semiconductors as strategic tools of competition, and the instability across the Taiwan Strait has heightened global concerns over their dependence on TSMC&rsquo;s manufacturing. <a href="https://www.hstoday.us/uncategorized/semiconductors-a-critical-infrastructure-vulnerability-in-americas-supply-chain/" target="_blank" rel="noopener noreferrer">Two countries have gained prominence</a> in policy discussions regarding risks in the global chips supply chain: Taiwan, given cross-strait tensions, and China, given export controls and strategic rivalry.</p>
+      <p>This has prompted the major players in the semiconductor industry to announce unprecedented semiconductor policies that aim at strategic reshoring and supply chain diversification. The U.S. CHIPS and Science Act allocates $52.7 billion to rebuild domestic manufacturing and consolidate R&amp;D. The EU Chips Act invests &euro;43 billion, aiming to double Europe&rsquo;s global market share by 2030 to advance technological sovereignty. Japan has announced a $27 billion investment by 2023, plus an additional $65 billion by 2030, to revive wafer fabrication and next-generation R&amp;D. Already having strong IDMs that provide strong foundations for vertical alignment, South Korea&rsquo;s K-Semiconductor Belt Strategy aims to integrate design, manufacturing, ATP, and materials all within its borders with substantial tax incentives. China&rsquo;s &ldquo;Big Fund,&rdquo; under Made in China 2025 and the 14th Five-Year Plan, has granted more than $48 billion and a wide range to expand domestic fabrication and ATP capacity.<a id="cite-2-1" class="article-cite" href="#ref-2" aria-label="Jump to reference 2">[2]</a></p>
+      <p>On paper, these policies seem to demonstrate a race towards disengagement and self-reliance. However, <a href="https://www.stimson.org/2025/why-taiwan-fears-america-first-risks-eroding-its-silicon-shield/" target="_blank" rel="noopener noreferrer">the process of complete decoupling is not feasible in practice, at least in the short to medium term.</a> As almost all segments of the semiconductor supply chain are highly specialized, they depend on a wide range of sophisticated technologies, a dense network of peripheral suppliers, highly trained labor forces, and require long-term and substantial investments. Each country&rsquo;s dominance comes from not only one or a few giant companies, but a whole industry around them to hold up each highly complex process, such as the hundreds of upstream and downstream companies supporting the functionality of TSMC in Taiwan&rsquo;s Hsinchu Science Park, and the world&rsquo;s largest fabless, EDA, and IP core companies nourished by the lively innovative cluster in California&rsquo;s Silicon Valley. This makes full-reshoring very difficult, as one needs to replicate a whole ecosystem instead of the one leading giant firm.</p>
+      <p>A more feasible development is a partial reorientation of the chip&rsquo;s value chain towards diversification. As pointed out by the <a href="https://web-assets.bcg.com/25/6e/7a123efd40199020ed1b4114be84/emerging-resilience-in-the-semiconductor-supply-chain-r.pdf" target="_blank" rel="noopener noreferrer">Boston Consulting Group&rsquo;s report</a> on the resilience of the global semiconductor value chain, the wafer manufacturing and ATP stages are facing the most drastic diversification, mostly due to policy incentives. In particular, governments have prioritized reshoring wafer fabrication capacity, especially at advanced nodes (&lt;7nm) that are currently concentrated in Taiwan, to safeguard technological sovereignty and reduce exposure to geopolitical risk. Also, the assembly, testing, and packaging (ATP) segment is rapidly expanding into emerging economies such as Singapore, India, and Vietnam, reflecting both cost considerations and strategic efforts to build more diversified supply chains.</p>
+      <p>On the other hand, while diversifying from the riskiest nodes, the major countries also initiated many alliance-based cooperation through co-investments and joint ventures, including Japan&rsquo;s JASM and Rapidus, where Japanese leading semiconductor companies cooperated with TSMC (Taiwan) and IBM (the US) respectively, and Germany&rsquo;s ESMC, a joint venture of Taiwan&rsquo;s TSMC, Switzerland&rsquo;s STMicroelectronics, Germany&rsquo;s Infineon, and the United States&rsquo; GlobalFoundries.<a id="cite-3-1" class="article-cite" href="#ref-3" aria-label="Jump to reference 3">[3]</a></p>
+      <p>Consequently, the semiconductor ecosystem is becoming both more resilient, through partial reshoring and diversification, and more integrated, through emerging large-scale cross-border partnerships. With the industry becoming more geopolitically sensitive, countries have started to secure critical bottlenecks domestically while accepting the fact that most parts of the supply chain will remain deeply interconnected and highly specialized.</p>
+
+      <h2 id="references">References</h2>
+      <p id="ref-1" class="article-ref-item"><span class="article-ref-label">[1]</span> Regional concentration, chokepoints, and trade statistics are documented in <a href="./article.html">Policy analysis</a> (Part 1) and its cited sources.</p>
+      <p id="ref-2" class="article-ref-item"><span class="article-ref-label">[2]</span> National semiconductor policies and funding figures are summarized in <a href="./article.html">Policy analysis</a> (Part 1) and its references.</p>
+      <p id="ref-3" class="article-ref-item"><span class="article-ref-label">[3]</span> JASM, Rapidus, and ESMC are described in <a href="./article.html">Policy analysis</a> (Part 1), especially the Japan and EU sections.</p>
+    </article>
+  </main>
+
+  <script src="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.js"></script>
+  <script type="module" src="./js/header-toggle.js"></script>
+  <script>
+    const articleMap = new maplibregl.Map({
+      container: "map",
+      style: {
+        version: 8,
+        glyphs: "https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
+        sources: {
+          cartodb: {
+            type: "raster",
+            tiles: ["https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"],
+            tileSize: 256
+          }
+        },
+        layers: [
+          {
+            id: "cartodb",
+            type: "raster",
+            source: "cartodb",
+            minzoom: 0,
+            maxzoom: 19
+          }
+        ]
+      },
+      center: [0, 20],
+      zoom: 1.5,
+      pitch: 0,
+      bearing: 0,
+      interactive: false
+    });
+
+    articleMap.on("load", () => {
+      articleMap.resize();
+    });
+  </script>
+</body>
+</html>
