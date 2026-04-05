@@ -521,6 +521,11 @@ main {
   color: #e9bcff !important;
 }
 
+/* ATP narrative emphasis (style guide highlight) */
+.atp-emphasis {
+  color: #ffca2c !important;
+}
+
 /* ── Stages overview card (dark-blue + gold, same palette) ── */
 .stages-card {
   background: #1a3a6e !important;
@@ -733,6 +738,16 @@ main {
   margin: 0;
 }
 
+/* Scene 16 only: wider equipment narrative card */
+.scene-16-revenue-card {
+  max-width: 620px;
+}
+
+/* Scene 22: wider ATP capacity narrative card */
+.atp-scene-revenue-card {
+  max-width: 620px;
+}
+
 /* ── Bar chart markers on map (Scene 4) ── */
 .revenue-bar-marker {
   display: flex;
@@ -776,6 +791,12 @@ main {
   }
   .revenue-card .revenue-card-text {
     font-size: 0.85rem;
+  }
+  .scene-16-revenue-card {
+    max-width: 400px;
+  }
+  .atp-scene-revenue-card {
+    max-width: 400px;
   }
 }
 
@@ -1124,6 +1145,45 @@ main {
   font-size: 0.72rem;
   font-weight: 500;
   opacity: 0.85;
+  margin-top: 0.1rem;
+}
+
+/* OSAT scene card markers (#ffca2c) */
+.osat-card-marker {
+  background: #ffca2c;
+  border: 2px solid #1a3a6e;
+  border-radius: 6px;
+  padding: 0.4rem 0.65rem;
+  min-width: 130px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.osat-card-marker.osat-card-marker--equipment {
+  background: #ea580c;
+}
+
+.osat-card-marker-name {
+  color: #1a3a6e;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.osat-card-marker-share {
+  color: #1a3a6e;
+  font-size: 0.74rem;
+  font-weight: 600;
+  margin-top: 0.1rem;
+}
+
+.osat-card-marker-cap {
+  color: #1a3a6e;
+  font-size: 0.72rem;
+  font-weight: 500;
+  opacity: 0.9;
   margin-top: 0.1rem;
 }
 

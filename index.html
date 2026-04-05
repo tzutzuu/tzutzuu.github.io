@@ -50,7 +50,7 @@
       - min-h-[900vh] forces a very long scroll so you can trigger many map “scenes”
         (each section is like a checkpoint for a map camera move / highlight change)
     -->
-    <main class="flex flex-col gap-0 min-h-[900vh]">
+    <main class="flex flex-col gap-0 min-h-[1300vh]">
 
       <!-- SCENE 0 (intro title screen) -->
       <section class="map-step relative min-h-[100vh] flex items-center justify-center p-4 sm:p-6 md:p-8" id="intro" data-scene="0">
@@ -427,6 +427,15 @@
 
       <!-- SCENE 15 (Foundry companies market share on world map) -->
       <section class="map-step relative min-h-[100vh] flex items-start justify-start p-4 sm:p-6 md:p-8" data-scene="15">
+        <div class="revenue-card pointer-events-auto" style="top: 8%; bottom: auto; right: 35%;">
+          <h3 class="revenue-card-title">Key Global Foundry Companies</h3>
+          <p class="revenue-card-text">
+            The global pure-play foundry industry is dominated by a small number of companies, Taiwan Semiconductor Manufacturing Company (TSMC) commands an overwhelming majority at 70.2%, securing Taiwan's central role in global chip production. Samsung Foundry (7.3%) and SMIC (5.1%) represent advanced-node capacity in South Korea and China respectively, while United Microelectronics (4.4%), GlobalFoundries (3.9%), and Huahong Group (2.5%) serve the mature-node market across Taiwan, the United States, and China.
+          </p>
+          <p class="revenue-card-text">
+            The percentages show market share measured by revenue share within the pure-play foundry segment only. Manufacturing value created by integrated device manufacturers (IDMs) are excluded, as their internal manufacturing capacity was not calculated. Samsung, which operates as both an IDM and a contract foundry, is represented here solely by its foundry business. Node size on the map reflects process capability: advanced nodes (sub-10nm and below) versus mature nodes (legacy nodes above 10nm).
+          </p>
+        </div>
         <div class="pointer-events-none absolute left-4 bottom-4 sm:left-8 sm:bottom-6 flex flex-col gap-3 items-start">
           <div class="flex flex-row gap-2">
             <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#94e0ea] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#1a3a6e]">
@@ -461,6 +470,15 @@
 
       <!-- SCENE 16 (Equipment companies in China and Japan) -->
       <section class="map-step relative min-h-[100vh] flex items-start justify-start p-4 sm:p-6 md:p-8" data-scene="16">
+        <div class="revenue-card pointer-events-auto scene-16-revenue-card" style="top: 8%; bottom: auto; right: 10%;">
+          <h3 class="revenue-card-title">Key Asian Semiconductor Equipment Companies</h3>
+          <p class="revenue-card-text">
+            Semiconductor manufacturing equipment consists of the highly specialized machinery used across the chip manufacturing process including deposition (coating the wafer with ultra-thin layers of material), etching (carving out the precise shapes and patterns using chemicals or plasma), cleaning (washing away dust, residue, and chemical remnants), lithography (shining light or radiation through a patterned mask onto the wafer to imprint the circuit design), and inspection systems (scanning the wafer at each stage to detect any defects). Each step demanding extreme precision at the nanoscale.
+          </p>
+          <p class="revenue-card-text">
+            Asia is home to several of the world's most important equipment makers, sitting alongside Western giants like Applied Materials, Lam Research, and ASML. Japan has long been a cornerstone of this industry: Tokyo Electron (TEL), the largest Japanese equipment maker, supplies a broad portfolio of deposition and etching tools used in fabs worldwide; Disco Corporation specializes in dicing and grinding equipment critical to chip packaging; and SCREEN Holdings is a leading supplier of wafer cleaning systems. On the Chinese side, NAURA Technology Group and AMEC have emerged as the country's most significant domestic equipment developers, driven by national efforts to reduce reliance on foreign suppliers amid ongoing export restrictions.
+          </p>
+        </div>
         <div class="pointer-events-none absolute left-4 bottom-4 sm:left-8 sm:bottom-6 flex flex-col gap-3 items-start">
           <div class="flex flex-row gap-2">
             <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#e88ebd] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#1a3a6e]">
@@ -487,6 +505,15 @@
 
       <!-- SCENE 17 (Equipment companies in United States and Netherlands) -->
       <section class="map-step relative min-h-[100vh] flex items-start justify-start p-4 sm:p-6 md:p-8" data-scene="17">
+        <div class="revenue-card pointer-events-auto" style="top: 8%; bottom: auto; right: 25%;">
+          <h3 class="revenue-card-title">Key European and American Semiconductor Equipment Companies</h3>
+          <p class="revenue-card-text">
+            The Western semiconductor equipment landscape is also dominated by a handful of very influential companies spanning the United States and the Netherlands. Lam Research, the largest American equipment maker, specializes in deposition and etching systems widely used across advanced logic and memory fabs. Applied Materials offers the broadest portfolio, covering deposition, etching, and inspection across virtually every chip manufacturing segment. KLA is the undisputed leader in process control and inspection, helping fabs detect defects and maintain yield at each production step.
+          </p>
+          <p class="revenue-card-text">
+            On the European side, ASML stands in a category of its own: the sole supplier of extreme ultraviolet (EUV) lithography machines in the world, giving it an unmatched monopoly over the most critical tool in advanced chip manufacturing. Without ASML's EUV systems, producing chips at the frontier nodes (&lt;7nm) is simply not possible. ASM International is a key specialist in atomic layer deposition, a technique essential for building the thinnest and most precise material layers in modern chips.
+          </p>
+        </div>
         <div class="pointer-events-none absolute left-4 bottom-4 sm:left-8 sm:bottom-6 flex flex-col gap-3 items-start">
           <div class="flex flex-row gap-2">
             <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#e88ebd] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#1a3a6e]">
@@ -513,6 +540,15 @@
 
       <!-- SCENE 18 (Wafer companies) -->
       <section class="map-step relative min-h-[100vh] flex items-start justify-start p-4 sm:p-6 md:p-8" data-scene="18">
+        <div class="revenue-card pointer-events-auto" style="top: 8%; bottom: auto; right: 35%;">
+          <h3 class="revenue-card-title">Key Global Silicon Wafer Companies</h3>
+          <p class="revenue-card-text">
+            Silicon wafers are the physical foundation of every semiconductor chip, where circuit patterns are etched during fabrication. The market has consolidated largely over recent decades, shrinking from more than 20 major players in 1990 to just 5 companies controlling roughly 95% of the market by 2020. The 300mm wafer (about 12 inches in diameter) has become the standard format for leading-edge chip production, and its supply is concentrated almost entirely in Japan, Taiwan, Germany, and South Korea.
+          </p>
+          <p class="revenue-card-text">
+            Shin-Etsu of Japan leads the market with approximately 29.4% global market share, making it the single largest wafer supplier in the world. Sumco (Japan), GlobalWafers (Taiwan), Siltronic (Germany), SK Siltron (South Korea), and Soitec (France) collectively account for a further 65% of the market. Notably, Soitec occupies a specialized niche, focusing on silicon-on-insulator (SOI) wafers used in RF chips and certain advanced logic applications, rather than standard bulk silicon wafers.
+          </p>
+        </div>
         <div class="pointer-events-none absolute left-4 bottom-4 sm:left-8 sm:bottom-6 flex flex-col gap-3 items-start">
           <div class="flex flex-row gap-2">
             <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#ccffa9] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#1a3a6e]">
@@ -549,9 +585,206 @@
         </div>
       </section>
 
+      <!-- SCENE 19 (ATP stage overview) -->
+      <section class="map-step relative min-h-[100vh] flex items-center justify-center p-4 sm:p-6 md:p-8" data-scene="19">
+        <div class="design-stage-card max-w-3xl">
+          <h2 class="design-stage-title">3. Assembly, Test, and Packaging (ATP)</h2>
+          <p class="design-stage-text">
+            Assembly, testing, and packaging (ATP) is the downstream stage that converts fabricated wafers into finished semiconductor products. <strong class="atp-emphasis">After wafers are diced into individual chips, each chip is tested for functionality, then packaged to provide electrical connections, thermal management, and physical protection.</strong> While traditionally focused on mass production, ATP has become more technologically significant with the rise of ever-smaller and more sophisticated chips that require more advanced packaging techniques such as chiplets and multi-die integration. These approaches allow multiple chips to be combined into a single system, improving performance and flexibility without relying solely on smaller transistors.
+          </p>
+        </div>
+      </section>
+
+      <!-- SCENE 20 (ATP inputs + infographic) -->
+      <section class="map-step relative min-h-[100vh] flex items-center justify-center p-4 sm:p-6 md:p-8" data-scene="20">
+        <div class="design-stage-row">
+          <div class="design-stage-card">
+            <h3 style="color: #ffd700; font-size: 1.3rem; font-weight: 700; margin: 0 0 0.8rem; line-height: 1.3;">ATP Inputs &amp; Equipment</h3>
+            <p class="design-stage-text">
+              ATP takes in fabricated wafers from the foundry as its primary input, alongside packaging materials such as substrates, lead frames, bonding wires, and encapsulant resins that structurally bind and protect each chip. Testing at multiple stages (both before and after packaging) relies on automated test equipment (ATE) and probe cards to screen for defects. The stage's output is <strong class="atp-emphasis">a finished, verified semiconductor package ready for integration into electronic systems: a bare chip mounted on a substrate, a system-in-package (SiP) combining multiple dies, or a standard component soldered onto a printed circuit board (PCB), </strong> depending on the end application.
+            </p>
+          </div>
+          <div class="design-stage-img-wrapper">
+            <img src="./assets/ATP_infographic_2.png" alt="ATP inputs and equipment infographic" class="design-stage-img" />
+          </div>
+        </div>
+      </section>
+
+      <!-- SCENE 21 (IDM vs OSAT) -->
+      <section class="map-step relative min-h-[100vh] flex items-center justify-center p-4 sm:p-6 md:p-8" data-scene="21">
+        <div class="fabless-idm-card max-w-5xl">
+          <h2 class="fabless-idm-title">Two Business Models: IDM and OSAT</h2>
+          <p class="fabless-idm-text">
+            Like other stages, ATP can be handled in-house by IDMs, which are vertically integrated firms such as Intel or Samsung that manage everything from design through packaging under one roof. This gives them tighter quality control and the ability to optimize all stages of chip production together.
+          </p>
+          <p class="fabless-idm-text">
+            The more dominant model in ATP is the <strong class="atp-emphasis">OSAT (Outsourced Semiconductor Assembly and Test). OSATs are contractors that handle assembly, testing, and packaging on behalf of fabless companies and pure-play foundries that do not own their own backend facilities.</strong> Furthermore, the OSAT model has grown in strategic importance as advanced packaging technologies have become a competitive differentiator. OSATs that can offer cutting-edge packaging formats now sit closer to the center of the semiconductor value chain.
+          </p>
+        </div>
+      </section>
+
+      <!-- SCENE 22 (Global ATP capacity — map bars + country fills) -->
+      <section class="map-step relative min-h-[100vh] flex items-start justify-start p-4 sm:p-6 md:p-8" data-scene="22">
+        <div class="revenue-card pointer-events-auto atp-scene-revenue-card" style="top: 22%; bottom: auto; right: 28%;">
+          <h3 class="revenue-card-title">Global ATP capacity share</h3>
+          <p class="revenue-card-text">
+            Global semiconductor assembly, test, and packaging (ATP) capacity is highly concentrated in Asia, with China and Taiwan alone accounting for 57% of worldwide capacity. Because ATP is less capital-intensive than wafer fabrication and more dependent on labor and logistics, it is naturally more concentrated in lower-cost regions, while the US and EU hold modest shares of 4% and 3%, respectively. Southeast Asia is emerging as a particularly dynamic cluster, already capturing roughly 20% of global ATP capacity in 2022 and projected by BCG's analysis to reach 27% in the coming years, driven by growth in Malaysia (7%), the Philippines (6%), Thailand (2%), and beyond. Leading OSATs such as ASE Group (Taiwan) and Amkor Technology (the US) operate at enormous scale, processing chips for hundreds of customers across virtually every end market.
+          </p>
+          <div class="revenue-card-source">
+            <p class="revenue-card-note">Note: These figures include capacity from both outsourced semiconductor assembly and test (OSAT) providers and integrated device manufacturers (IDMs).</p>
+            <p class="revenue-card-link">Source: <a href="https://www.bcg.com/publications/2024/emerging-resilience-in-semiconductor-supply-chain" target="_blank" rel="noopener noreferrer" class="underline decoration-dotted hover:text-blue-600">BCG &mdash; Emerging Resilience in the Semiconductor Supply Chain</a></p>
+          </div>
+        </div>
+        <div class="pointer-events-none absolute left-4 bottom-4 sm:left-8 sm:bottom-6 flex flex-col gap-3 items-start">
+          <div class="flex flex-row gap-2">
+            <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#ffca2c] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#1a3a6e]">
+              <span class="text-base sm:text-lg font-semibold tracking-wide text-[#1a3a6e]">
+                ATP
+              </span>
+            </div>
+          </div>
+          <div class="pointer-events-auto flex flex-wrap gap-2 text-[11px] sm:text-[12px] text-[#6b7280]">
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #1a3a6e;"></div>
+              <span>United States</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #ffca2c;"></div>
+              <span>The EU</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #2563eb;"></div>
+              <span>South Korea</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #16a34a;"></div>
+              <span>Taiwan</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #dc2626;"></div>
+              <span>China</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #f97316;"></div>
+              <span>Malaysia</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #a855f7;"></div>
+              <span>Philippines</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #14b8a6;"></div>
+              <span>Thailand</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #ca8a04;"></div>
+              <span>Mexico</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCENE 23 (OSAT companies — Taiwan) -->
+      <section class="map-step relative min-h-[100vh] flex items-start justify-start p-4 sm:p-6 md:p-8" data-scene="23">
+        <div class="revenue-card pointer-events-auto atp-scene-revenue-card" style="top: 48%; bottom: auto; right: 8%;">
+          <h3 class="revenue-card-title">Key OSAT Companies in Taiwan</h3>
+          <p class="revenue-card-text">
+            Taiwan dominates global OSAT, anchored by ASE Group, the world's largest OSAT provider, which alone commands a 44.6% share of the global market. Powertech Technology, King Yuan Electronics, and ChipMos further reinforce Taiwan's depth in advanced packaging and testing services. Together, these companies serve a broad range of semiconductor customers, from logic and memory to analog and mixed-signal chips, cementing Taiwan's position as the undisputed center of global ATP capacity.
+          </p>
+          <div class="revenue-card-source">
+            <p class="revenue-card-note">The graph shows OSAT market share by revenue, and does not include IDM where the value creation is internal to the company.</p>
+            <p class="revenue-card-link">Source: <a href="https://www.trendforce.com/presscenter/news/20250513-12577.html" target="_blank" rel="noopener noreferrer" class="underline decoration-dotted hover:text-blue-600">TrendForce</a></p>
+          </div>
+        </div>
+        <div class="pointer-events-none absolute left-4 bottom-4 sm:left-8 sm:bottom-6 flex flex-col gap-3 items-start">
+          <div class="flex flex-row gap-2">
+            <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#ffca2c] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#1a3a6e]">
+              <span class="text-base sm:text-lg font-semibold tracking-wide text-[#1a3a6e]">OSAT</span>
+            </div>
+          </div>
+          <div class="pointer-events-auto flex flex-wrap gap-2 text-[11px] sm:text-[12px] text-[#6b7280]">
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #16a34a;"></div>
+              <span>Taiwan</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCENE 24 (OSAT companies — China) -->
+      <section class="map-step relative min-h-[100vh] flex items-start justify-start p-4 sm:p-6 md:p-8" data-scene="24">
+        <div class="revenue-card pointer-events-auto atp-scene-revenue-card" style="top: 18%; bottom: auto; left: 10%;">
+          <h3 class="revenue-card-title">Key OSAT Companies in China</h3>
+          <p class="revenue-card-text">
+            China's OSAT sector is led by JCET and Tongfu Microelectronics, which together account for roughly 20% of global ATP capacity. Tianshui Huatian Technology and private equity-backed Wise Road Capital round out a domestic ecosystem that Beijing has actively cultivated through industrial policy and investment. China's OSAT players are rapidly expanding their advanced packaging capabilities, positioning the country as a growing competitor to Taiwan across a widening range of end markets.
+          </p>
+          <div class="revenue-card-source">
+            <p class="revenue-card-note">The graph shows OSAT market share by revenue, and does not include IDM where the value creation is internal to the company.</p>
+            <p class="revenue-card-link">Source: <a href="https://www.trendforce.com/presscenter/news/20250513-12577.html" target="_blank" rel="noopener noreferrer" class="underline decoration-dotted hover:text-blue-600">TrendForce</a></p>
+          </div>
+        </div>
+        <div class="pointer-events-none absolute left-4 bottom-4 sm:left-8 sm:bottom-6 flex flex-col gap-3 items-start">
+          <div class="flex flex-row gap-2">
+            <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#ffca2c] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#1a3a6e]">
+              <span class="text-base sm:text-lg font-semibold tracking-wide text-[#1a3a6e]">OSAT</span>
+            </div>
+          </div>
+          <div class="pointer-events-auto flex flex-wrap gap-2 text-[11px] sm:text-[12px] text-[#6b7280]">
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #dc2626;"></div>
+              <span>China</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCENE 25 (OSAT companies — US, Japan, Korea + Advantest equipment) -->
+      <section class="map-step relative min-h-[100vh] flex items-start justify-start p-4 sm:p-6 md:p-8" data-scene="25">
+        <div class="revenue-card pointer-events-auto atp-scene-revenue-card" style="top: 8%; bottom: auto; right: 28%;">
+          <h3 class="revenue-card-title">Key OSAT Companies elsewhere</h3>
+          <p class="revenue-card-text">
+            Outside of Asia's core hubs, Amkor Technology stands as the most significant independent OSAT player, commanding a 15.2% global market share and operating major facilities across the US, Europe, and Southeast Asia. South Korea's Hana Micron serves as a notable regional specialist. On the equipment side, Japan's Advantest is a critical enabler of the broader ATP ecosystem, supplying the test systems that OSATs and IDMs depend on.
+          </p>
+          <div class="revenue-card-source">
+            <p class="revenue-card-note">The graph shows OSAT market share by revenue, and does not include IDM where the value creation is internal to the company.</p>
+            <p class="revenue-card-note">Japan's Advantest is an equipment provider, so it is not included in the market share calculation.</p>
+            <p class="revenue-card-link">Source: <a href="https://www.trendforce.com/presscenter/news/20250513-12577.html" target="_blank" rel="noopener noreferrer" class="underline decoration-dotted hover:text-blue-600">TrendForce</a></p>
+          </div>
+        </div>
+        <div class="pointer-events-none absolute left-4 bottom-4 sm:left-8 sm:bottom-6 flex flex-col gap-3 items-start">
+          <div class="flex flex-row gap-2">
+            <div class="pointer-events-auto inline-flex items-center px-4 py-2 bg-[#ffca2c] rounded-sm shadow-[0_10px_25px_rgba(0,0,0,0.18)] border border-[#1a3a6e]">
+              <span class="text-base sm:text-lg font-semibold tracking-wide text-[#1a3a6e]">OSAT</span>
+            </div>
+          </div>
+          <div class="pointer-events-auto flex flex-wrap gap-2 text-[11px] sm:text-[12px] text-[#6b7280]">
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #1a3a6e;"></div>
+              <span>United States</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #ea580c;"></div>
+              <span>Japan</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #2563eb;"></div>
+              <span>South Korea</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #ffca2c;"></div>
+              <span>OSAT (map marker)</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-3 rounded-sm border border-[#6b7280]/30" style="background-color: #ea580c;"></div>
+              <span>Test equipment (Advantest)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- FINAL SECTION: Independent interactive map (full-section) -->
       <!-- Keep .map-step so scroll-snap doesn't "jump" back -->
-      <section class="map-step relative min-h-[100vh] h-[100vh] p-0" data-scene="19">
+      <section class="map-step relative min-h-[100vh] h-[100vh] p-0" data-scene="26">
         <div
           id="interactive-map"
           class="absolute inset-0 w-full h-full bg-white"

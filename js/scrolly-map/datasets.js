@@ -237,6 +237,32 @@ export const matureProcessExtraBars = [
   { name: "Rest of World", value: 8, color: "#9ca3af", coords: [60, -8] },
 ];
 
+// Global ATP capacity share (scene 22) — BCG; country fills + bar order
+export const atpCapacityCountryHighlightIds = {
+  840: { name: "United States", value: 4, color: "#1a3a6e", coords: [-98, 39] },
+  /* Bar anchor coords offset from land so labels don’t stack (fills still follow real borders). */
+  158: { name: "Taiwan", value: 27, color: "#16a34a", coords: [127.2, 21.2] },
+  156: { name: "China", value: 30, color: "#dc2626", coords: [103, 32] },
+  410: { name: "South Korea", value: 9, color: "#2563eb", coords: [130.5, 38.2] },
+  458: { name: "Malaysia", value: 7, color: "#f97316", coords: [109.5, 2.8] },
+  608: { name: "Philippines", value: 6, color: "#a855f7", coords: [126.5, 9.5] },
+  764: { name: "Thailand", value: 2, color: "#14b8a6", coords: [99.2, 17.8] },
+  484: { name: "Mexico", value: 2, color: "#ca8a04", coords: [-102, 23] },
+};
+
+/** Bar chart order (matches narrative); includes EU aggregate (no single country polygon). */
+export const atpCapacityBarItems = [
+  { name: "United States", value: 4, color: "#1a3a6e", coords: [-98, 39] },
+  { name: "The EU", value: 3, color: "#ffca2c", coords: [12, 52] },
+  { name: "South Korea", value: 9, color: "#2563eb", coords: [130.5, 38.2] },
+  { name: "Taiwan", value: 27, color: "#16a34a", coords: [118.2, 21.2] },
+  { name: "China", value: 30, color: "#dc2626", coords: [103, 32] },
+  { name: "Malaysia", value: 7, color: "#f97316", coords: [109.5, 2.8] },
+  { name: "Philippines", value: 6, color: "#a855f7", coords: [126.5, 4.5] },
+  { name: "Thailand", value: 2, color: "#14b8a6", coords: [99.2, 17.8] },
+  { name: "Mexico", value: 2, color: "#ca8a04", coords: [-102, 23] },
+];
+
 // Foundry market share by company (scene 15)
 export const foundryMarketShareGeoJson = {
   type: "FeatureCollection",
@@ -681,6 +707,191 @@ export const waferLinesGeoJson = {
       type: "Feature",
       properties: { name: "SK Siltron" },
       geometry: { type: "LineString", coordinates: [[128.3509342, 36.1172459], [139.5, 45.5]] },
+    },
+  ],
+};
+
+// OSAT Taiwan (scene 23)
+export const osatTaiwanGeoJson = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      properties: { name: "ASE Group", share: "44.6%", marketcap: "$41.43B", kind: "osat" },
+      geometry: { type: "Point", coordinates: [120.3014353, 22.6272784] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Powertech Technology Inc.", share: "5.5%", marketcap: "$4.66B", kind: "osat" },
+      geometry: { type: "Point", coordinates: [120.9983556, 24.8693044] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "King Yuan Electronics Group", share: "2.2%", marketcap: "$9.9B", kind: "osat" },
+      geometry: { type: "Point", coordinates: [121.0072678, 24.7975947] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "ChipMos", share: "1.7%", marketcap: "$1.24B", kind: "osat" },
+      geometry: { type: "Point", coordinates: [121.0017566, 24.7758606] },
+    },
+  ],
+};
+
+export const osatTaiwanCountryHighlightIds = {
+  158: { name: "Taiwan", color: "#16a34a" },
+};
+
+export const osatTaiwanCardData = [
+  { name: "ASE Group", share: "44.6%", marketcap: "$41.43B", coords: [118.35, 21.65] },
+  { name: "Powertech Technology Inc.", share: "5.5%", marketcap: "$4.66B", coords: [123.15, 25.45] },
+  { name: "King Yuan Electronics Group", share: "2.2%", marketcap: "$9.9B", coords: [122.55, 24.0] },
+  { name: "ChipMos", share: "1.7%", marketcap: "$1.24B", coords: [119.15, 25.15] },
+];
+
+export const osatTaiwanLinesGeoJson = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      properties: { name: "ASE Group" },
+      geometry: { type: "LineString", coordinates: [[120.3014353, 22.6272784], [118.35, 21.65]] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Powertech Technology Inc." },
+      geometry: { type: "LineString", coordinates: [[120.9983556, 24.8693044], [123.15, 25.45]] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "King Yuan Electronics Group" },
+      geometry: { type: "LineString", coordinates: [[121.0072678, 24.7975947], [122.55, 24.0]] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "ChipMos" },
+      geometry: { type: "LineString", coordinates: [[121.0017566, 24.7758606], [119.15, 25.15]] },
+    },
+  ],
+};
+
+// OSAT China (scene 24)
+export const osatChinaGeoJson = {
+  type: "FeatureCollection",
+  features: [
+    /* Jiangyin cluster: display offsets so dots + labels read cleanly at scene zoom */
+    {
+      type: "Feature",
+      properties: { name: "JCET", share: "12%", marketcap: "$70.66B", kind: "osat" },
+      geometry: { type: "Point", coordinates: [119.72, 31.48] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Tongfu Microelectronics", share: "8%", marketcap: "$8.50B", kind: "osat" },
+      geometry: { type: "Point", coordinates: [121.48, 32.52] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Tianshui Huatian Technology", share: "2.2%", marketcap: "$5.4B", kind: "osat" },
+      geometry: { type: "Point", coordinates: [105.70996, 34.57975] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Wise Road Capital", share: "1.7%", marketcap: "$12.33B", kind: "osat" },
+      geometry: { type: "Point", coordinates: [116.4579436, 39.9095506] },
+    },
+  ],
+};
+
+export const osatChinaCountryHighlightIds = {
+  156: { name: "China", color: "#dc2626" },
+};
+
+export const osatChinaCardData = [
+  /* JCET / Tongfu: cards far apart (NE vs S) so HTML markers don’t stack on screen */
+  { name: "JCET", share: "12%", marketcap: "$70.66B", coords: [132.4, 34.15] },
+  { name: "Tongfu Microelectronics", share: "8%", marketcap: "$8.50B", coords: [117.85, 25.35] },
+  { name: "Tianshui Huatian Technology", share: "2.2%", marketcap: "$5.4B", coords: [101.8, 38.85] },
+  { name: "Wise Road Capital", share: "1.7%", marketcap: "$12.33B", coords: [125.8, 42.45] },
+];
+
+export const osatChinaLinesGeoJson = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      properties: { name: "JCET" },
+      geometry: { type: "LineString", coordinates: [[119.72, 31.48], [127.4, 34.15]] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Tongfu Microelectronics" },
+      geometry: { type: "LineString", coordinates: [[121.48, 32.52], [117.85, 28.35]] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Tianshui Huatian Technology" },
+      geometry: { type: "LineString", coordinates: [[105.70996, 34.57975], [101.8, 35.85]] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Wise Road Capital" },
+      geometry: { type: "LineString", coordinates: [[116.4579436, 39.9095506], [119.8, 40.45]] },
+    },
+  ],
+};
+
+// OSAT global — Amkor, Hana Micron, Advantest equipment (scene 25)
+export const osatGlobalGeoJson = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      properties: { name: "Advantest", role: "OSAT equipment", marketcap: "$41.43B", kind: "equipment" },
+      geometry: { type: "Point", coordinates: [139.7655925, 35.6836406] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Amkor Technology", share: "15.2%", marketcap: "$10.84B", kind: "osat" },
+      geometry: { type: "Point", coordinates: [-111.8990921, 33.3355266] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Hana Micron", share: "2.2%", marketcap: "$1.3B", kind: "osat" },
+      geometry: { type: "Point", coordinates: [127.043444, 36.8674107] },
+    },
+  ],
+};
+
+export const osatGlobalCountryHighlightIds = {
+  840: { name: "United States", color: "#1a3a6e" },
+  392: { name: "Japan", color: "#ea580c" },
+  410: { name: "South Korea", color: "#2563eb" },
+};
+
+export const osatGlobalCardData = [
+  { name: "Advantest", role: "OSAT equipment", marketcap: "$41.43B", kind: "equipment", coords: [128.5, 52.5] },
+  { name: "Amkor Technology", share: "15.2%", marketcap: "$10.84B", kind: "osat", coords: [-118.0, 22.8] },
+  { name: "Hana Micron", share: "2.2%", marketcap: "$1.3B", kind: "osat", coords: [112.5, 22.2] },
+];
+
+export const osatGlobalLinesGeoJson = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      properties: { name: "Advantest" },
+      geometry: { type: "LineString", coordinates: [[139.7655925, 35.6836406], [128.5, 52.5]] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Amkor Technology" },
+      geometry: { type: "LineString", coordinates: [[-111.8990921, 33.3355266], [-118.0, 22.8]] },
+    },
+    {
+      type: "Feature",
+      properties: { name: "Hana Micron" },
+      geometry: { type: "LineString", coordinates: [[127.043444, 36.8674107], [112.5, 22.2]] },
     },
   ],
 };

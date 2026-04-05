@@ -22,6 +22,8 @@ import {
   advancedProcessExtraBars,
   matureProcessCountryHighlightIds,
   matureProcessExtraBars,
+  atpCapacityCountryHighlightIds,
+  atpCapacityBarItems,
   foundryMarketShareGeoJson,
   foundryCountryHighlightIds,
   foundryCardData,
@@ -38,6 +40,18 @@ import {
   waferCountryHighlightIds,
   waferCardData,
   waferLinesGeoJson,
+  osatTaiwanGeoJson,
+  osatTaiwanCountryHighlightIds,
+  osatTaiwanCardData,
+  osatTaiwanLinesGeoJson,
+  osatChinaGeoJson,
+  osatChinaCountryHighlightIds,
+  osatChinaCardData,
+  osatChinaLinesGeoJson,
+  osatGlobalGeoJson,
+  osatGlobalCountryHighlightIds,
+  osatGlobalCardData,
+  osatGlobalLinesGeoJson,
 } from "./datasets.js";
 
 // Scrollytelling (fixed) MapLibre map used by the main story sections.
@@ -55,9 +69,13 @@ let foundryCardMarkers = [];
 let equipmentCardMarkers = [];
 let equipmentUsNlCardMarkers = [];
 let waferCardMarkers = [];
+let osatTaiwanCardMarkers = [];
+let osatChinaCardMarkers = [];
+let osatGlobalCardMarkers = [];
 let barMarkers = [];
 let advancedBarMarkers = [];
 let matureBarMarkers = [];
+let atpBarMarkers = [];
 
 const map = new maplibregl.Map({
   container: "map",
@@ -694,6 +712,56 @@ map.on("load", () => {
     matureBarMarkers.push(marker);
   });
 
+  // Global ATP capacity share (scene 22) – country fills + bars
+  fetch("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json")
+    .then((r) => r.json())
+    .then((world) => {
+      const countries = topojson.feature(world, world.objects.countries);
+      const atpTargetIds = new Set(Object.keys(atpCapacityCountryHighlightIds).map(Number));
+      const atpHighlighted = {
+        type: "FeatureCollection",
+        features: countries.features
+          .filter((f) => atpTargetIds.has(Number(f.id)))
+          .map((f) => {
+            const info = atpCapacityCountryHighlightIds[Number(f.id)];
+            return { ...f, properties: { ...f.properties, highlightColor: info.color, name: info.name } };
+          }),
+      };
+
+      map.addSource("atp-country-highlights", { type: "geojson", data: atpHighlighted });
+      map.addLayer({
+        id: "atp-country-fills",
+        type: "fill",
+        source: "atp-country-highlights",
+        layout: { visibility: "none" },
+        paint: { "fill-color": ["get", "highlightColor"], "fill-opacity": 0.25 },
+      });
+      map.addLayer({
+        id: "atp-country-borders",
+        type: "line",
+        source: "atp-country-highlights",
+        layout: { visibility: "none" },
+        paint: { "line-color": ["get", "highlightColor"], "line-width": 2.5 },
+      });
+    })
+    .catch((err) => console.warn("Failed to load ATP capacity country boundaries:", err));
+
+  const atpMaxBarHeight = 160;
+  const atpRefMax = 30;
+  atpCapacityBarItems.forEach((item) => {
+    const barHeight = Math.max(2, Math.round((item.value / atpRefMax) * atpMaxBarHeight));
+    const el = document.createElement("div");
+    el.className = "revenue-bar-marker";
+    el.style.display = "none";
+    el.innerHTML = `
+      <div class="revenue-bar-value">${item.value}%</div>
+      <div class="revenue-bar" style="height:${barHeight}px;background:${item.color};"></div>
+      <div class="revenue-bar-label">${item.name}</div>
+    `;
+    const marker = new maplibregl.Marker({ element: el, anchor: "bottom" }).setLngLat(item.coords).addTo(map);
+    atpBarMarkers.push(marker);
+  });
+
   // Foundry company market share (scene 15)
   map.addSource("foundry-market-share", { type: "geojson", data: foundryMarketShareGeoJson });
   fetch("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json")
@@ -995,6 +1063,227 @@ map.on("load", () => {
     waferCardMarkers.push(marker);
   });
 
+  // OSAT Taiwan (scene 23)
+  map.addSource("osat-tw-companies", { type: "geojson", data: osatTaiwanGeoJson });
+  fetch("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json")
+    .then((r) => r.json())
+    .then((world) => {
+      const countries = topojson.feature(world, world.objects.countries);
+      const twTargetIds = new Set(Object.keys(osatTaiwanCountryHighlightIds).map(Number));
+      const twHighlighted = {
+        type: "FeatureCollection",
+        features: countries.features
+          .filter((f) => twTargetIds.has(Number(f.id)))
+          .map((f) => {
+            const info = osatTaiwanCountryHighlightIds[Number(f.id)];
+            return { ...f, properties: { ...f.properties, highlightColor: info.color, name: info.name } };
+          }),
+      };
+      map.addSource("osat-tw-country-highlights", { type: "geojson", data: twHighlighted });
+      map.addLayer({
+        id: "osat-tw-country-fills",
+        type: "fill",
+        source: "osat-tw-country-highlights",
+        layout: { visibility: "none" },
+        paint: { "fill-color": ["get", "highlightColor"], "fill-opacity": 0.12 },
+      });
+      map.addLayer({
+        id: "osat-tw-country-borders",
+        type: "line",
+        source: "osat-tw-country-highlights",
+        layout: { visibility: "none" },
+        paint: { "line-color": ["get", "highlightColor"], "line-width": 2.5, "line-dasharray": [3, 2] },
+      });
+      const v = currentScene === 23 ? "visible" : "none";
+      map.setLayoutProperty("osat-tw-country-fills", "visibility", v);
+      map.setLayoutProperty("osat-tw-country-borders", "visibility", v);
+      if (map.getLayer("osat-tw-company-dots")) map.moveLayer("osat-tw-company-dots");
+    })
+    .catch((err) => console.warn("Failed to load OSAT Taiwan country highlights:", err));
+
+  map.addLayer({
+    id: "osat-tw-company-dots",
+    type: "circle",
+    source: "osat-tw-companies",
+    layout: { visibility: "none" },
+    paint: {
+      "circle-radius": 10,
+      "circle-color": "#ffca2c",
+      "circle-stroke-color": "#1a3a6e",
+      "circle-stroke-width": 2,
+    },
+  });
+  map.addSource("osat-tw-lines", { type: "geojson", data: osatTaiwanLinesGeoJson });
+  map.addLayer({
+    id: "osat-tw-lines",
+    type: "line",
+    source: "osat-tw-lines",
+    layout: { visibility: "none" },
+    paint: { "line-color": "#1a3a6e", "line-width": 1.5, "line-dasharray": [4, 2] },
+  });
+  osatTaiwanCardData.forEach((item) => {
+    const el = document.createElement("div");
+    el.className = "osat-card-marker";
+    el.style.display = "none";
+    el.innerHTML = `
+      <div class="osat-card-marker-name">${item.name}</div>
+      <div class="osat-card-marker-share">${item.share} | OSAT</div>
+      <div class="osat-card-marker-cap">${item.marketcap}</div>
+    `;
+    const marker = new maplibregl.Marker({ element: el, anchor: "center" }).setLngLat(item.coords).addTo(map);
+    osatTaiwanCardMarkers.push(marker);
+  });
+
+  // OSAT China (scene 24)
+  map.addSource("osat-cn-companies", { type: "geojson", data: osatChinaGeoJson });
+  fetch("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json")
+    .then((r) => r.json())
+    .then((world) => {
+      const countries = topojson.feature(world, world.objects.countries);
+      const cnTargetIds = new Set(Object.keys(osatChinaCountryHighlightIds).map(Number));
+      const cnHighlighted = {
+        type: "FeatureCollection",
+        features: countries.features
+          .filter((f) => cnTargetIds.has(Number(f.id)))
+          .map((f) => {
+            const info = osatChinaCountryHighlightIds[Number(f.id)];
+            return { ...f, properties: { ...f.properties, highlightColor: info.color, name: info.name } };
+          }),
+      };
+      map.addSource("osat-cn-country-highlights", { type: "geojson", data: cnHighlighted });
+      map.addLayer({
+        id: "osat-cn-country-fills",
+        type: "fill",
+        source: "osat-cn-country-highlights",
+        layout: { visibility: "none" },
+        paint: { "fill-color": ["get", "highlightColor"], "fill-opacity": 0.12 },
+      });
+      map.addLayer({
+        id: "osat-cn-country-borders",
+        type: "line",
+        source: "osat-cn-country-highlights",
+        layout: { visibility: "none" },
+        paint: { "line-color": ["get", "highlightColor"], "line-width": 2.5, "line-dasharray": [3, 2] },
+      });
+      const v = currentScene === 24 ? "visible" : "none";
+      map.setLayoutProperty("osat-cn-country-fills", "visibility", v);
+      map.setLayoutProperty("osat-cn-country-borders", "visibility", v);
+      if (map.getLayer("osat-cn-company-dots")) map.moveLayer("osat-cn-company-dots");
+    })
+    .catch((err) => console.warn("Failed to load OSAT China country highlights:", err));
+
+  map.addLayer({
+    id: "osat-cn-company-dots",
+    type: "circle",
+    source: "osat-cn-companies",
+    layout: { visibility: "none" },
+    paint: {
+      "circle-radius": 10,
+      "circle-color": "#ffca2c",
+      "circle-stroke-color": "#1a3a6e",
+      "circle-stroke-width": 2,
+    },
+  });
+  map.addSource("osat-cn-lines", { type: "geojson", data: osatChinaLinesGeoJson });
+  map.addLayer({
+    id: "osat-cn-lines",
+    type: "line",
+    source: "osat-cn-lines",
+    layout: { visibility: "none" },
+    paint: { "line-color": "#1a3a6e", "line-width": 1.5, "line-dasharray": [4, 2] },
+  });
+  osatChinaCardData.forEach((item) => {
+    const el = document.createElement("div");
+    el.className = "osat-card-marker";
+    el.style.display = "none";
+    el.innerHTML = `
+      <div class="osat-card-marker-name">${item.name}</div>
+      <div class="osat-card-marker-share">${item.share} | OSAT</div>
+      <div class="osat-card-marker-cap">${item.marketcap}</div>
+    `;
+    const marker = new maplibregl.Marker({ element: el, anchor: "center" }).setLngLat(item.coords).addTo(map);
+    osatChinaCardMarkers.push(marker);
+  });
+
+  // OSAT global — US / Japan / Korea + Advantest equipment (scene 25)
+  map.addSource("osat-gl-companies", { type: "geojson", data: osatGlobalGeoJson });
+  fetch("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json")
+    .then((r) => r.json())
+    .then((world) => {
+      const countries = topojson.feature(world, world.objects.countries);
+      const glTargetIds = new Set(Object.keys(osatGlobalCountryHighlightIds).map(Number));
+      const glHighlighted = {
+        type: "FeatureCollection",
+        features: countries.features
+          .filter((f) => glTargetIds.has(Number(f.id)))
+          .map((f) => {
+            const info = osatGlobalCountryHighlightIds[Number(f.id)];
+            return { ...f, properties: { ...f.properties, highlightColor: info.color, name: info.name } };
+          }),
+      };
+      map.addSource("osat-gl-country-highlights", { type: "geojson", data: glHighlighted });
+      map.addLayer({
+        id: "osat-gl-country-fills",
+        type: "fill",
+        source: "osat-gl-country-highlights",
+        layout: { visibility: "none" },
+        paint: { "fill-color": ["get", "highlightColor"], "fill-opacity": 0.12 },
+      });
+      map.addLayer({
+        id: "osat-gl-country-borders",
+        type: "line",
+        source: "osat-gl-country-highlights",
+        layout: { visibility: "none" },
+        paint: { "line-color": ["get", "highlightColor"], "line-width": 2.5, "line-dasharray": [3, 2] },
+      });
+      const v = currentScene === 25 ? "visible" : "none";
+      map.setLayoutProperty("osat-gl-country-fills", "visibility", v);
+      map.setLayoutProperty("osat-gl-country-borders", "visibility", v);
+      if (map.getLayer("osat-gl-company-dots")) map.moveLayer("osat-gl-company-dots");
+    })
+    .catch((err) => console.warn("Failed to load OSAT global country highlights:", err));
+
+  map.addLayer({
+    id: "osat-gl-company-dots",
+    type: "circle",
+    source: "osat-gl-companies",
+    layout: { visibility: "none" },
+    paint: {
+      "circle-radius": 10,
+      "circle-color": ["match", ["get", "kind"], "equipment", "#ea580c", "#ffca2c"],
+      "circle-stroke-color": "#1a3a6e",
+      "circle-stroke-width": 2,
+    },
+  });
+  map.addSource("osat-gl-lines", { type: "geojson", data: osatGlobalLinesGeoJson });
+  map.addLayer({
+    id: "osat-gl-lines",
+    type: "line",
+    source: "osat-gl-lines",
+    layout: { visibility: "none" },
+    paint: { "line-color": "#1a3a6e", "line-width": 1.5, "line-dasharray": [4, 2] },
+  });
+  osatGlobalCardData.forEach((item) => {
+    const el = document.createElement("div");
+    el.className = item.kind === "equipment" ? "osat-card-marker osat-card-marker--equipment" : "osat-card-marker";
+    el.style.display = "none";
+    if (item.kind === "equipment") {
+      el.innerHTML = `
+        <div class="osat-card-marker-name">${item.name}</div>
+        <div class="osat-card-marker-share">${item.role}</div>
+        <div class="osat-card-marker-cap">${item.marketcap}</div>
+      `;
+    } else {
+      el.innerHTML = `
+        <div class="osat-card-marker-name">${item.name}</div>
+        <div class="osat-card-marker-share">${item.share} | OSAT</div>
+        <div class="osat-card-marker-cap">${item.marketcap}</div>
+      `;
+    }
+    const marker = new maplibregl.Marker({ element: el, anchor: "center" }).setLngLat(item.coords).addTo(map);
+    osatGlobalCardMarkers.push(marker);
+  });
+
   applyScene(0, { instant: true });
   setupScrollObserver();
 });
@@ -1027,9 +1316,9 @@ function setupScrollObserver() {
 
     const rawIndex = sceneIndices[closestIdx];
     if (!isNaN(rawIndex) && rawIndex >= 0 && rawIndex !== currentScene) {
-      const safeIndex = Math.max(0, Math.min(rawIndex, scenes.length - 1));
       currentScene = rawIndex;
-      applyScene(safeIndex);
+      const camIndex = Math.max(0, Math.min(rawIndex, scenes.length - 1));
+      applyScene(camIndex);
     }
 
     if (mapLoaded) {
@@ -1182,6 +1471,57 @@ function setupScrollObserver() {
       }
       waferCardMarkers.forEach((m) => {
         m.getElement().style.display = currentScene === 18 ? "block" : "none";
+      });
+      // OSAT Taiwan (scene 23)
+      if (map.getLayer("osat-tw-company-dots")) {
+        const osatTwVis = currentScene === 23 ? "visible" : "none";
+        map.setLayoutProperty("osat-tw-company-dots", "visibility", osatTwVis);
+        if (map.getLayer("osat-tw-lines")) map.setLayoutProperty("osat-tw-lines", "visibility", osatTwVis);
+      }
+      if (map.getLayer("osat-tw-country-fills")) {
+        const osatTwC = currentScene === 23 ? "visible" : "none";
+        map.setLayoutProperty("osat-tw-country-fills", "visibility", osatTwC);
+        map.setLayoutProperty("osat-tw-country-borders", "visibility", osatTwC);
+      }
+      osatTaiwanCardMarkers.forEach((m) => {
+        m.getElement().style.display = currentScene === 23 ? "block" : "none";
+      });
+      // OSAT China (scene 24)
+      if (map.getLayer("osat-cn-company-dots")) {
+        const osatCnVis = currentScene === 24 ? "visible" : "none";
+        map.setLayoutProperty("osat-cn-company-dots", "visibility", osatCnVis);
+        if (map.getLayer("osat-cn-lines")) map.setLayoutProperty("osat-cn-lines", "visibility", osatCnVis);
+      }
+      if (map.getLayer("osat-cn-country-fills")) {
+        const osatCnC = currentScene === 24 ? "visible" : "none";
+        map.setLayoutProperty("osat-cn-country-fills", "visibility", osatCnC);
+        map.setLayoutProperty("osat-cn-country-borders", "visibility", osatCnC);
+      }
+      osatChinaCardMarkers.forEach((m) => {
+        m.getElement().style.display = currentScene === 24 ? "block" : "none";
+      });
+      // OSAT global (scene 25)
+      if (map.getLayer("osat-gl-company-dots")) {
+        const osatGlVis = currentScene === 25 ? "visible" : "none";
+        map.setLayoutProperty("osat-gl-company-dots", "visibility", osatGlVis);
+        if (map.getLayer("osat-gl-lines")) map.setLayoutProperty("osat-gl-lines", "visibility", osatGlVis);
+      }
+      if (map.getLayer("osat-gl-country-fills")) {
+        const osatGlC = currentScene === 25 ? "visible" : "none";
+        map.setLayoutProperty("osat-gl-country-fills", "visibility", osatGlC);
+        map.setLayoutProperty("osat-gl-country-borders", "visibility", osatGlC);
+      }
+      osatGlobalCardMarkers.forEach((m) => {
+        m.getElement().style.display = currentScene === 25 ? "block" : "none";
+      });
+      // Global ATP capacity share (scene 22)
+      if (map.getLayer("atp-country-fills")) {
+        const atpVis = currentScene === 22 ? "visible" : "none";
+        map.setLayoutProperty("atp-country-fills", "visibility", atpVis);
+        map.setLayoutProperty("atp-country-borders", "visibility", atpVis);
+      }
+      atpBarMarkers.forEach((m) => {
+        m.getElement().style.display = currentScene === 22 ? "flex" : "none";
       });
     }
 
